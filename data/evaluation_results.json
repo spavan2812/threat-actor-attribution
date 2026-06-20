@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "expected": "APT29",
+    "predicted_top1": "APT29",
+    "predicted_top3": [
+      "APT29",
+      "Kimsuky",
+      "Winter Vivern"
+    ],
+    "top1": true,
+    "top3": true,
+    "reciprocal_rank": 1.0,
+    "type": "explicit_tools"
+  },
+  {
+    "id": 2,
+    "expected": "APT29",
+    "predicted_top1": "APT29",
+    "predicted_top3": [
+      "APT29",
+      "Kimsuky",
+      "Magic Hound"
+    ],
+    "top1": true,
+    "top3": true,
+    "reciprocal_rank": 1.0,
+    "type": "paraphrased"
+  },
+  {
+    "id": 3,
+    "expected": "APT28",
+    "predicted_top1": "APT28",
+    "predicted_top3": [
+      "APT28",
+      "Sandworm Team",
+      "OilRig"
+    ],
+    "top1": true,
+    "top3": true,
+    "reciprocal_rank": 1.0,
+    "type": "explicit_tools"
+  },
+  {
+    "id": 4,
+    "expected": "APT28",
+    "predicted_top1": "APT28",
+    "predicted_top3": [
+      "APT28",
+      "Magic Hound",
+      "APT29"
+    ],
+    "top1": true,
+    "top3": true,
+    "reciprocal_rank": 1.0,
+    "type": "paraphrased"
+  },
+  {
+    "id": 5,
+    "expected": "Lazarus Group",
+    "predicted_top1": "INC Ransom",
+    "predicted_top3": [
+      "INC Ransom",
+      "Lazarus Group",
+      "FIN8"
+    ],
+    "top1": false,
+    "top3": true,
+    "reciprocal_rank": 0.5,
+    "type": "explicit_tools"
+  },
+  {
+    "id": 6,
+    "expected": "Lazarus Group",
+    "predicted_top1": "INC Ransom",
+    "predicted_top3": [
+      "INC Ransom",
+      "Kimsuky",
+      "Contagious Interview"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0,
+    "type": "paraphrased"
+  },
+  {
+    "id": 7,
+    "expected": "Sandworm Team",
+    "predicted_top1": "Sandworm Team",
+    "predicted_top3": [
+      "Sandworm Team",
+      "UNC3886",
+      "Turla"
+    ],
+    "top1": true,
+    "top3": true,
+    "reciprocal_rank": 1.0,
+    "type": "explicit_tools"
+  },
+  {
+    "id": 8,
+    "expected": "Sandworm Team",
+    "predicted_top1": "Turla",
+    "predicted_top3": [
+      "Turla",
+      "APT-C-36",
+      "LuminousMoth"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.14285714285714285,
+    "type": "paraphrased"
+  },
+  {
+    "id": 9,
+    "expected": "Kimsuky",
+    "predicted_top1": "Kimsuky",
+    "predicted_top3": [
+      "Kimsuky",
+      "HEXANE",
+      "APT-C-36"
+    ],
+    "top1": true,
+    "top3": true,
+    "reciprocal_rank": 1.0,
+    "type": "explicit_tools"
+  },
+  {
+    "id": 10,
+    "expected": "Kimsuky",
+    "predicted_top1": "Kimsuky",
+    "predicted_top3": [
+      "Kimsuky",
+      "APT37",
+      "Naikon"
+    ],
+    "top1": true,
+    "top3": true,
+    "reciprocal_rank": 1.0,
+    "type": "paraphrased"
+  },
+  {
+    "id": 11,
+    "expected": "APT41",
+    "predicted_top1": "INC Ransom",
+    "predicted_top3": [
+      "INC Ransom",
+      "Velvet Ant",
+      "Sandworm Team"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0,
+    "type": "explicit_tools"
+  },
+  {
+    "id": 12,
+    "expected": "APT41",
+    "predicted_top1": "Sandworm Team",
+    "predicted_top3": [
+      "Sandworm Team",
+      "Andariel",
+      "Magic Hound"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.16666666666666666,
+    "type": "paraphrased"
+  },
+  {
+    "id": 13,
+    "expected": "OilRig",
+    "predicted_top1": "OilRig",
+    "predicted_top3": [
+      "OilRig",
+      "Magic Hound",
+      "FIN7"
+    ],
+    "top1": true,
+    "top3": true,
+    "reciprocal_rank": 1.0,
+    "type": "explicit_tools"
+  },
+  {
+    "id": 14,
+    "expected": "OilRig",
+    "predicted_top1": "MuddyWater",
+    "predicted_top3": [
+      "MuddyWater",
+      "Kimsuky",
+      "OilRig"
+    ],
+    "top1": false,
+    "top3": true,
+    "reciprocal_rank": 0.3333333333333333,
+    "type": "paraphrased"
+  },
+  {
+    "id": 15,
+    "expected": "Winnti Group",
+    "predicted_top1": "UNC3886",
+    "predicted_top3": [
+      "UNC3886",
+      "Winnti Group",
+      "LuminousMoth"
+    ],
+    "top1": false,
+    "top3": true,
+    "reciprocal_rank": 0.5,
+    "type": "explicit_tools"
+  }
+]
