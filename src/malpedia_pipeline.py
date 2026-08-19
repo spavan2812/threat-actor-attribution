@@ -1,10 +1,3 @@
-# Threat Actor Attribution System - Malware Actor Mapping
-# ELE8095 OO05 - Sai Pavan Yoganand
-# Source: Developed with Claude AI assistance (Anthropic)
-# Purpose: Build malware/tool to actor mappings from MITRE ATT&CK
-#          Replaces hardcoded TOOL_TO_ACTOR dictionary with
-#          properly sourced MITRE data
-
 from mitreattack.stix20 import MitreAttackData
 import json
 import os
@@ -17,10 +10,7 @@ def clean_text(text):
     return text
 
 def build_malware_actor_mapping():
-    """
-    Extracts software/malware to actor mappings from MITRE ATT&CK.
-    Returns a dictionary: malware_name_lower -> list of actor names
-    """
+   
     print("Loading MITRE ATT&CK data...")
     mitre = MitreAttackData("data/mitre/enterprise-attack.json")
 
@@ -33,14 +23,14 @@ def build_malware_actor_mapping():
     software_profiles = []
 
     for software in software_list:
-        # Get software name and aliases
+        
         name = software.get("name", "")
         aliases = software.get("x_mitre_aliases", [])
         description = clean_text(software.get("description", ""))
         software_type = software.get("x_mitre_type", "")
         stix_id = software.get("id", "")
 
-        # Get all groups that use this software
+        
         try:
             groups = mitre.get_groups_using_software(stix_id)
             actor_names = []
@@ -65,7 +55,7 @@ def build_malware_actor_mapping():
         }
         software_profiles.append(profile)
 
-        # Add to index if has actor associations
+       
         if actor_names:
             # Index by primary name
             if name:

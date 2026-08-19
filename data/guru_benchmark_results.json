@@ -1,0 +1,709 @@
+[
+  {
+    "actor": "APT28",
+    "file": "dataDump.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT28",
+    "file": "Background.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT28",
+    "file": "Gment.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT28",
+    "file": "fancyBearSed.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT28",
+    "file": "Espionage.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT28",
+    "file": "Decoy.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT28",
+    "file": "Credentials.txt",
+    "rank": 10,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "APT28",
+    "file": "Clinton.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT28",
+    "file": "pawnStormEse.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT28",
+    "file": "bangla.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT28",
+    "file": "Approachig.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT28",
+    "file": "BearsMidst.txt",
+    "rank": 2,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "APT28",
+    "file": "SofacyGment.txt",
+    "rank": 2,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "APT28",
+    "file": "Zebrosy.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT28",
+    "file": "fed.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT29",
+    "file": "APT29_AR-17-20045_Enhanced_Analysis_of_GRIZZLY_STEPPE_Activity.txt",
+    "rank": 2,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "APT29",
+    "file": "Eset.txt",
+    "rank": 5,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "APT29",
+    "file": "SolarwindsCompromise.txt",
+    "rank": 3,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "APT29",
+    "file": "Foggy.txt",
+    "rank": 3,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "APT29",
+    "file": "Sunburst.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT29",
+    "file": "Hemlock.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT29",
+    "file": "AdministrativePrivs.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT29",
+    "file": "Ritual.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT29",
+    "file": "Solarstorm.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT29",
+    "file": "APT29_OnionDuke_Tor.txt",
+    "rank": 2,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "APT29",
+    "file": "Phishing.txt",
+    "rank": 3,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "APT29",
+    "file": "FinalUpdate.txt",
+    "rank": 3,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "APT29",
+    "file": "Debr.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "APT29",
+    "file": "C2.txt",
+    "rank": 2,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "APT29",
+    "file": "APT29_miniduke.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "Interception.txt",
+    "rank": 12,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "Lazarus_Lazarus_Under_The_Hood_PDF_final(1).txt",
+    "rank": 10,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "Croissant.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "Cobra(1).txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "Lazarus_operation-applejeus.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "Cobra.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "Lazarus_media-alert-secureworks-discovers-north-korean-cyber-threat-group-lazarus-spearphishing.txt",
+    "rank": 8,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "Lazarus_Lazarus_Under_The_Hood_PDF_final.txt",
+    "rank": 10,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "NorthStar.txt",
+    "rank": 11,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "Lazarus_drop2-attacks-suggest-dark-seoul-attackers-return(1).txt",
+    "rank": 5,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "Bitcoin.txt",
+    "rank": 6,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "Lazarus_TA17-318B.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "Lolbins.txt",
+    "rank": 6,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "DDOS.txt",
+    "rank": 5,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "CISA.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "Phishing.txt",
+    "rank": 3,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "TargetReconnaisance.txt",
+    "rank": 4,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "SouthKorean.txt",
+    "rank": 4,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "VelvetChollima.txt",
+    "rank": 3,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "KGHSpyware.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "StealthPower.txt",
+    "rank": 25,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "CISAAdvisory.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "AppleSeedBackdoor.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "Academia.txt",
+    "rank": 38,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "speakPhish.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "Northkorean.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "ChromeExtention.txt",
+    "rank": 51,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "NamingConvention.txt",
+    "rank": 155,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "UNSecuity.txt",
+    "rank": 8,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "KabarCobra.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "OilRig",
+    "file": "OilRig_unit42-oilrig-actors-provide-glimpse-development-testing-efforts.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "OilRig",
+    "file": "OilRig_mtrends-2018.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "OilRig",
+    "file": "OilRig_unit42-oilrig-uses-ismdoor-variant-possibly-linked-greenbug-threat-group.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "OilRig",
+    "file": "OilRig_the-oilrig-campaign-attacks-on-saudi-arabian-organizations-deliver-helminth-backdoor.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "OilRig",
+    "file": "HardPass.txt",
+    "rank": 8,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "OilRig",
+    "file": "Steganography.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "OilRig",
+    "file": "OilRig_targeted_attacksaga.txt",
+    "rank": 2,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "OilRig",
+    "file": "mTrends.txt",
+    "rank": 3,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "OilRig",
+    "file": "UpdateToolkit.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "OilRig",
+    "file": "BreakingTheRules.txt",
+    "rank": 10,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "OilRig",
+    "file": "ShamoonAttacks.txt",
+    "rank": 11,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "OilRig",
+    "file": "OilRig_unit42-twoface-webshell-persistent-access-point-lateral-movement.txt",
+    "rank": 50,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "OilRig",
+    "file": "RGDoor.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "OilRig",
+    "file": "DevelopmentTesting.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "OilRig",
+    "file": "Chrysene.txt",
+    "rank": 5,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "UKRPowerAuthority.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "SupplyChainUkraine.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "MicrosoftOffice.txt",
+    "rank": 54,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "Industroyer2.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "SANSInfoSharing.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "GeorgiaAttack.txt",
+    "rank": 3,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "UkraineCriticalInfra.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "WhenLightsGoOut.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "UkrainePowerGrid.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "BlackEnergy.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "DeepElectricGrid.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "TelebotsBackdoor.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "Win32Destroyer.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "GRUIntrusionSet.txt",
+    "rank": 3,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "DistrictOfPennsylvania.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Winnti Group",
+    "file": "Winnti_chinese-hacking-group-allegedly-behind-thyssenkrupp-hack.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Winnti Group",
+    "file": "Winnti_novetta_winntianalysis.txt",
+    "rank": 9,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Winnti Group",
+    "file": "Winnti_the-winnti-honeypot-luring-intruders.txt",
+    "rank": 19,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Winnti Group",
+    "file": "Winnti_winnti-evolution-going-open-source_2.txt",
+    "rank": 4,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Winnti Group",
+    "file": "Winnti_winnti-evolution-going-open-source.txt",
+    "rank": 4,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Winnti Group",
+    "file": "Winnti_winnti-abuses-github.txt",
+    "rank": 30,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Winnti Group",
+    "file": "Winnti_winnti-1-0-technical-analysis.txt",
+    "rank": 4,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Winnti Group",
+    "file": "Winnti_suckfly-revealing-secret-life-your-code-signing-certificates.txt",
+    "rank": 21,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Winnti Group",
+    "file": "Winnti_an-update-on-winnti.txt",
+    "rank": 2,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "Winnti Group",
+    "file": "Winnti_winnti-more-than-just-a-game.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Winnti Group",
+    "file": "Winnti_games-are-over.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  }
+]

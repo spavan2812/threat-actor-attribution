@@ -1,0 +1,377 @@
+[
+  {
+    "pulse_id": "63df64009daa232c0e0dd4a6",
+    "pulse_name": "sauron",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "63df6409d6fa5666f3940d4b",
+    "pulse_name": "sauron",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "64e7990cbf87cda6c38013cf",
+    "pulse_name": "IOC Records \u2192 Provided by @NextRayAI",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "68433bfde12da10e8aacd7b3",
+    "pulse_name": "checking",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "61e9925fba80a573d41824e0",
+    "pulse_name": "65,000+ NFT-Related Domains and Subdomains: Possible Vehicles for NFT Scams",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "61e9926be68f1c4bb03fbd81",
+    "pulse_name": "65,000+ NFT-Related Domains and Subdomains: Possible Vehicles for NFT Scams",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "655e49bf7fb5ebc444e8db6a",
+    "pulse_name": "DGA by Cybsec",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "64de492643ea275c2b0e2eb9",
+    "pulse_name": "Data Center",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "65136e65a6a0e9d07117995a",
+    "pulse_name": "SSDEEP",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "653f1fa4726c7449f379d172",
+    "pulse_name": "SSDEEP",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "641075ea0ad9abf646851efe",
+    "pulse_name": "Fake shop - Asian based scam - Reverse DNS ECPAGE",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "6372fcbbdf0f94984ca6b1ee",
+    "pulse_name": "42,000 malicious web domains impersonating well-known brands",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "6372fcd8445c8fd680a58fbb",
+    "pulse_name": "42,000 malicious web domains impersonating well-known brands",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "5cd935b9209fa2207798d17f",
+    "pulse_name": "Continued Kimsuky Attacks",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "6775b17c488523ee9d290afd",
+    "pulse_name": "agressive extra",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "6372fcdc13b6be612c3ac2a7",
+    "pulse_name": "42,000 malicious web domains impersonating well-known brands",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "65d8c22181dedbe91a1010aa",
+    "pulse_name": "[ADMIN] AlienVault Federation",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "65d8c227297b4ee9c73fd788",
+    "pulse_name": "[ADMIN] AlienVault Federation",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "65d8c2278fc7d3a32db22cda",
+    "pulse_name": "[ADMIN] AlienVault Federation",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "64f3771616d9a9891947e4df",
+    "pulse_name": "Pool's Closed (by @scnrscnr)",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "64f37719db054ccde25aa9df",
+    "pulse_name": "Pool's Closed (by @scnrscnr)",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "65707b9630308cb99a817277",
+    "pulse_name": "Pool's Closed",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "698e93e1ab02db8c49e8c3ed",
+    "pulse_name": "\u201cBroken Seal\u201d DocuSign-themed Delivery with Fileless Process Hollowing (Zeppelin/Bloat-A)",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "69bf64e1d5e06aa6207f78de",
+    "pulse_name": "Spam \u201cBroken Seal\u201d DocuSign-themed Delivery w/Fileless Process Hollowing (Zeppelin/Bloat-A) by msudosos",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "630cf581c99cc1c3397af75a",
+    "pulse_name": "paulabloomfield ",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "69375583aeea809ad44d73cf",
+    "pulse_name": "Investigating Indonesias Gambling Ecosystem: Indicators of National-Level Cyber Operations",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "6396ed1776582837bd2b165e",
+    "pulse_name": "Fake Casino/betting websites targetting people where such activities are illegal",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "6254e2332447b4daf1cbe820",
+    "pulse_name": "sms scam campaign",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "603eb1abdd4812819c64e197",
+    "pulse_name": "HAFNIUM targeting Exchange Servers with 0-day exploits",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "64ed117e2308a042e50e1e9e",
+    "pulse_name": "Investigation of Distribution Vectors and Threat Network Infrastructure",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "5f66894a162701a154f89480",
+    "pulse_name": "APT39 Intrusion Activity",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "663d2869e0f3a42bbddc42ff",
+    "pulse_name": "UPX executable packer.",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "64e79918d81a265ff4d3d514",
+    "pulse_name": "IOC Records \u2192 Provided by @NextRayAI",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "64e7991e0e88ef39bef95a12",
+    "pulse_name": "IOC Records \u2192 Provided by @NextRayAI",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "64e7992247e0b22db4bd642a",
+    "pulse_name": "IOC Records \u2192 Provided by @NextRayAI",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "64e79923528ad3eb11ea884c",
+    "pulse_name": "IOC Records \u2192 Provided by @NextRayAI",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "655e4ad4441b4cd4352a4cb2",
+    "pulse_name": "DGA by Cybsec",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "6513643765a85856d4f2e7ad",
+    "pulse_name": "sms scam campaign",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "63f4e8f331fad5e54c0bed1e",
+    "pulse_name": "TarD5B7.tmp - and all using its ioc's",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "67a1ef79c35c7cf3191ee0da",
+    "pulse_name": "<script src=\"https://otx.alienvault.com/pulse/5ee7247cdb3820b358b37a71.js\"></script>",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "69c081afa2bd54a9599b7c07",
+    "pulse_name": "PhishDestroy \u2014 Active Phishing & Crypto Scam Domains",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "69f83ca77d6c947de6c080f8",
+    "pulse_name": "Credit: PhishDestroy Clone [\"phish detroy- open domains\"]",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "69f83ca9411c8ab5d294a7e2",
+    "pulse_name": "Credit: PhishDestroy Clone [\"phish detroy- open domains\"]",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "69559618f8684a6bf216909c",
+    "pulse_name": "DEV-0537 alias LAPSUS$ -hashes from the report by kpmg(.)com - thanks!",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "62023c1d358dd60d4a952d73",
+    "pulse_name": "Cert paste #e only comparison",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "620305add9f625884292ce99",
+    "pulse_name": "LAPSUS$ Ransomware Gang targets Nepal &#8211; Vairav Technology Blog",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "6222566e179a2c0dd38055c7",
+    "pulse_name": "NVIDIA Code Signing Certificates Compromised by Lapsus$ Group Used to Sign Malicious Binaries",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "622487253538e7fe9b45df1f",
+    "pulse_name": "Lapsus$ group - Nvidia certificate malware stealer",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "62324535fc8686a6577c135a",
+    "pulse_name": "LAPSUS$ Hacking Group",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "5643379e67db8c7a156b1c2e",
+    "pulse_name": "Chimera",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "566acf774637f27ede86dcb7",
+    "pulse_name": "Inside Chimera Ransomware \u2013 the first \u2018doxingware\u2019 in wild",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "5714360836a907015b5ec4db",
+    "pulse_name": "Rokku Ransomware MD5 IOCs",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "57b23c8d270eaf0133a32c3e",
+    "pulse_name": "Shakti Trojan: Document Thief",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "5aa10f2c7ef799502ff95276",
+    "pulse_name": "Ransom:Win32/Chicrypt",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "5aa11ba2613d49537f50c5fd",
+    "pulse_name": "Virus:Win32/Chimera",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "5e9f00a851b9b600d30a6182",
+    "pulse_name": "APT Group Chimera",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "5ea073a3c14dae77c07976d3",
+    "pulse_name": "Taiwan High-Tech Ecosystem Targeted by Foreign APT Group",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "6510a2dd9c7acab85a26f978",
+    "pulse_name": "Phishing sites 2023-09-24",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "65401d5ee5a7359a5e815a6a",
+    "pulse_name": "Darkside 2020 Ecosystem  .BEware | BGP.tools | Target Tsara Brashears",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "65401d73e96dd70037ed22a7",
+    "pulse_name": "Darkside 2020 Ecosystem  .BEware | BGP.tools | Target Tsara Brashears",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "65401d76b057b79aaf7ba4a7",
+    "pulse_name": "Darkside 2020 Ecosystem  .BEware | BGP.tools | Target Tsara Brashears",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "620ba9535bd88fb10bb8f58a",
+    "pulse_name": "Charting TA2541's Flight",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "620c36889e4f32b4ccd0a731",
+    "pulse_name": "TA2541 APT Targets the Aviation Industry With AsyncRAT",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "620d0ab0b15b7b7aa68ef04a",
+    "pulse_name": "TA2541 Uses RATs to Remotely Control Compromised Machines in Aviation, Transport, and Defense Sectors",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "620b81d3d3bd53628170710f",
+    "pulse_name": "Charting TA2541's Flight\u00a0 | Proofpoint US",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "6211c90d8e4b0525e552de95",
+    "pulse_name": "Charting TA2541&#039;s Flight\u00a0 | Proofpoint US",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "62b1c2ee1593528e5125a75a",
+    "pulse_name": "ToddyCat: Unveiling an unknown APT actor attacking high-profile entities in Europe and Asia",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "65284ed1bc395d88690d451a",
+    "pulse_name": "ToddyCat: Keep calm and check logs",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "66268baffefb9d70f0dcd150",
+    "pulse_name": "ToddyCat is making holes in your infrastructure",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "672f6ed2b564f00b7c5cb13f",
+    "pulse_name": "Threatfox Recent Additions",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "64e799240e77a37a1a1fd255",
+    "pulse_name": "IOC Records \u2192 Provided by @NextRayAI",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "64e799540d4697a46f8f230c",
+    "pulse_name": "IOC Records \u2192Provided by @NextRayAI",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "574dd609dc99310134d426e7",
+    "pulse_name": "A New Threat Actor Targets UAE Dissidents",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "653f1293425fd3b96cd906d2",
+    "pulse_name": "sms scam campaign",
+    "reason": "timeout"
+  },
+  {
+    "pulse_id": "614e0dc583aa90bf2dd4ec91",
+    "pulse_name": "Network IOCs",
+    "reason": "timeout"
+  }
+]

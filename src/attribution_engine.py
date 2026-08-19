@@ -1,15 +1,17 @@
-# Threat Actor Attribution System - Attribution Engine
-# ELE8095 OO05 - Sai Pavan Yoganand
-# Purpose: Match attack descriptions against threat actor profiles
-
 import json
 import re
 from collections import defaultdict
 
-def load_groups(filepath="data/mitre/groups.json"):
-    """Load the enriched MITRE groups data."""
+def load_groups(filepath="data/unified/knowledge_base.json"):
+    """Loads unified knowledge base from JSON file."""
     with open(filepath, "r") as f:
         return json.load(f)
+
+def load_groups_with_idf(filepath="data/unified/knowledge_base.json"):
+    groups = load_groups(filepath)
+    idf_weights = compute_idf_weights(groups)
+    print(f"Computed IDF weights for {len(idf_weights)} techniques.")
+    return groups, idf_weights
 
 # Mapping of common tools, malware, and keywords to ATT&CK technique IDs
 TOOL_TO_TTP = {
@@ -184,49 +186,139 @@ def build_technique_index(groups):
 
     return all_techniques
 
-def score_groups(groups, matched_ttps, direct_actor_signals=None):
+def compute_idf_weights(groups):
     """
-    Scores each threat actor group based on:
-    1. TTP overlap with matched TTPs
-    2. Direct actor signals from known tool mentions
+    Computes IDF weight for each ATT&CK technique.
+    Techniques used by few actors get high weight.
+    Techniques used by many actors get low weight.
+    IDF = log(total_actors / actors_using_technique)
+    """
+    import math
+
+    total_actors = len([g for g in groups if g["ttp_count"] > 0])
+    technique_actor_count = {}
+
+    # Count how many actors use each technique
+    for group in groups:
+        for ttp in group.get("ttps", []):
+            tid = ttp["technique_id"]
+            if tid:
+                technique_actor_count[tid] = \
+                    technique_actor_count.get(tid, 0) + 1
+
+    # Compute IDF for each technique
+    # This block is OUTSIDE the for loop
+    idf_weights = {}
+    for tid, count in technique_actor_count.items():
+        idf_weights[tid] = math.log(total_actors / count)
+
+    return idf_weights
+
+def score_groups(groups, matched_ttps,
+                 direct_actor_signals=None, idf_weights=None):
+    """
+    Scores each threat actor group based on TTP overlap.
+    Direct actor signals from exclusive tool attribution
+    receive maximum bonus — overriding TTP overlap scores.
     """
     if direct_actor_signals is None:
         direct_actor_signals = set()
 
+    if not matched_ttps and not direct_actor_signals:
+        return []
+
     scored = []
+
+    def technique_family(tid):
+        """Base technique ID, stripping any sub-technique suffix (T1071.001 -> T1071)."""
+        return tid.split(".")[0]
 
     for group in groups:
         if group["ttp_count"] == 0:
             continue
 
         group_ttps = set(t["technique_id"] for t in group["ttps"])
-        overlap = matched_ttps.intersection(group_ttps)
 
-        if len(overlap) == 0 and group["name"] not in direct_actor_signals:
-            continue
+        # Exact matches first
+        exact_overlap = matched_ttps.intersection(group_ttps) \
+            if matched_ttps else set()
 
-        # Base score from TTP overlap
-        ttp_score = len(overlap) / len(matched_ttps) if matched_ttps else 0
+        # FAMILY-LEVEL matches: a base technique (e.g. query has
+        # "T1071") should match an actor profile that only has a
+        # specific sub-technique (e.g. actor has "T1071.001"), and
+        # vice versa. Real, confirmed bug: exact-string matching
+        # alone was causing actors to show ZERO overlap with their
+        # own real test cases purely because MITRE documents them at
+        # a different technique-ID granularity (base vs sub-
+        # technique) than what got extracted from the query text --
+        # not a genuine absence of the behaviour.
+        family_overlap = set()
+        if matched_ttps:
+            query_families = {technique_family(t) for t in matched_ttps}
+            group_families = {technique_family(t) for t in group_ttps}
+            matching_families = query_families & group_families
+            for t in matched_ttps:
+                if technique_family(t) in matching_families:
+                    family_overlap.add(t)
 
-        # Bonus for direct actor signal from known tools
-        actor_bonus = 0.5 if group["name"] in direct_actor_signals else 0
+        overlap = exact_overlap | family_overlap
 
-        # Check aliases too
-        for alias in group.get("aliases", []):
-            if alias in direct_actor_signals:
-                actor_bonus = 0.3
-                break
+        if len(overlap) == 0 and group["name"] \
+                not in direct_actor_signals:
+            # Check aliases too
+            alias_match = False
+            for alias in group.get("aliases", []):
+                if alias in direct_actor_signals:
+                    alias_match = True
+                    break
+            if not alias_match:
+                continue
+
+        # IDF-weighted overlap score: rare, specific techniques
+        # count more than ubiquitous ones (phishing, PowerShell)
+        # nearly every actor shares. Falls back to simple ratio
+        # if no idf_weights provided. DELIBERATELY different from
+        # the earlier tested finding that IDF weighting hurts the
+        # FULL fused system (60%->46.7%) -- that test had the
+        # semantic engine active to compensate; this specifically
+        # targets the TTP-only pathway, a genuinely different
+        # scoring regime with zero semantic signal to fall back on.
+        if matched_ttps and idf_weights:
+            matched_weight_sum = sum(
+                idf_weights.get(t, 1.0) for t in matched_ttps
+            )
+            overlap_weight_sum = sum(
+                idf_weights.get(t, 1.0) for t in overlap
+            )
+            ttp_score = (overlap_weight_sum / matched_weight_sum
+                        if matched_weight_sum > 0 else 0)
+        else:
+            ttp_score = len(overlap) / len(matched_ttps) \
+                if matched_ttps else 0
+
+        # Direct signal is definitive — exclusive tool match
+        # overrides TTP overlap scoring (dead-code fix applied:
+        # the old 0.5 default was always immediately overwritten
+        # by the check below, so it never had any real effect)
+        actor_bonus = 0
+        if group["name"] in direct_actor_signals:
+            actor_bonus = 1.0
+        else:
+            for alias in group.get("aliases", []):
+                if alias in direct_actor_signals:
+                    actor_bonus = 1.0
+                    break
 
         final_score = min((ttp_score + actor_bonus) * 100, 100)
 
         scored.append({
             "name": group["name"],
-            "aliases": group["aliases"],
+            "aliases": group.get("aliases", []),
             "score": round(final_score, 2),
             "matched_ttps": list(overlap),
             "matched_count": len(overlap),
             "total_group_ttps": group["ttp_count"],
-            "direct_signal": group["name"] in direct_actor_signals
+            "direct_signal": group["name"] in direct_actor_signals,
         })
 
     scored.sort(key=lambda x: x["score"], reverse=True)

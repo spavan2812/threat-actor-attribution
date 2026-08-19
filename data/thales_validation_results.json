@@ -1,0 +1,100 @@
+[
+  {
+    "id": "T1",
+    "expected": "APT41",
+    "predicted_top1": "APT41",
+    "predicted_top3": [
+      "APT41",
+      "Threat Group-3390",
+      "BackdoorDiplomacy"
+    ],
+    "top1": true,
+    "top3": true,
+    "reciprocal_rank": 1.0,
+    "source": "Thales Threat Landscape Report H2 2025, Countries section"
+  },
+  {
+    "id": "T2",
+    "expected": "APT28",
+    "predicted_top1": "APT29",
+    "predicted_top3": [
+      "APT29",
+      "Gamaredon Group",
+      "Turla"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.25,
+    "source": "Thales Threat Landscape Report H2 2025, Countries section"
+  },
+  {
+    "id": "T3",
+    "expected": "Lazarus Group",
+    "predicted_top1": "POLONIUM",
+    "predicted_top3": [
+      "POLONIUM",
+      "The White Company",
+      "APT37"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0,
+    "source": "Thales Threat Landscape Report H2 2025, Countries section"
+  },
+  {
+    "id": "T4",
+    "expected": "APT37",
+    "predicted_top1": "Winter Vivern",
+    "predicted_top3": [
+      "Winter Vivern",
+      "BackdoorDiplomacy",
+      "Earth Lusca"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0,
+    "source": "Thales Threat Landscape Report H2 2025, Countries section"
+  },
+  {
+    "id": "T5",
+    "expected": "Kimsuky",
+    "predicted_top1": "Winter Vivern",
+    "predicted_top3": [
+      "Winter Vivern",
+      "APT5",
+      "APT-C-36"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0,
+    "source": "Thales Threat Landscape Report H2 2025, Countries section"
+  },
+  {
+    "id": "T6",
+    "expected": "Sandworm Team",
+    "predicted_top1": "Wizard Spider",
+    "predicted_top3": [
+      "Wizard Spider",
+      "Play",
+      "Sandworm Team"
+    ],
+    "top1": false,
+    "top3": true,
+    "reciprocal_rank": 0.3333333333333333,
+    "source": "Thales Threat Landscape Report H2 2025, Countries section"
+  },
+  {
+    "id": "T7",
+    "expected": "APT29",
+    "predicted_top1": "Inception",
+    "predicted_top3": [
+      "Inception",
+      "Gamaredon Group",
+      "APT29"
+    ],
+    "top1": false,
+    "top3": true,
+    "reciprocal_rank": 0.3333333333333333,
+    "source": "Thales Threat Landscape Report H2 2025, Countries section"
+  }
+]

@@ -1,7 +1,3 @@
-# Threat Actor Attribution System - Data Pipeline
-# ELE8095 OO05 - Sai Pavan Yoganand
-# Purpose: Pull and structure MITRE ATT&CK Groups data
-
 from mitreattack.stix20 import MitreAttackData
 import requests
 import json

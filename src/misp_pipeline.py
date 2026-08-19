@@ -1,5 +1,3 @@
-#Pull and structure MISP Galaxy threat actor data
-
 import requests
 import json
 import os

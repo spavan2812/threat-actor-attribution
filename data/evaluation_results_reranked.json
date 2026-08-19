@@ -5,7 +5,7 @@
     "predicted_top1": "APT29",
     "predicted_top3": [
       "APT29",
-      "Mofang",
+      "Earth Lusca",
       "BackdoorDiplomacy"
     ],
     "top1": true,
@@ -19,12 +19,12 @@
     "predicted_top1": "Inception",
     "predicted_top3": [
       "Inception",
-      "Mofang",
-      "Rancor"
+      "Turla",
+      "APT29"
     ],
     "top1": false,
-    "top3": false,
-    "reciprocal_rank": 0.2,
+    "top3": true,
+    "reciprocal_rank": 0.3333333333333333,
     "type": "paraphrased"
   },
   {
@@ -33,7 +33,7 @@
     "predicted_top1": "APT28",
     "predicted_top3": [
       "APT28",
-      "Molerats",
+      "Turla",
       "ToddyCat"
     ],
     "top1": true,
@@ -62,7 +62,7 @@
     "predicted_top3": [
       "Lazarus Group",
       "AppleJeus",
-      "TA505"
+      "FIN8"
     ],
     "top1": true,
     "top3": true,
@@ -76,7 +76,7 @@
     "predicted_top3": [
       "Earth Lusca",
       "Moonstone Sleet",
-      "TA505"
+      "AppleJeus"
     ],
     "top1": false,
     "top3": false,
@@ -132,7 +132,7 @@
     "predicted_top3": [
       "Kimsuky",
       "APT37",
-      "Moonstone Sleet"
+      "AppleJeus"
     ],
     "top1": true,
     "top3": true,
@@ -146,7 +146,7 @@
     "predicted_top3": [
       "POLONIUM",
       "APT41",
-      "Earth Lusca"
+      "BackdoorDiplomacy"
     ],
     "top1": false,
     "top3": true,
@@ -174,7 +174,7 @@
     "predicted_top3": [
       "OilRig",
       "BackdoorDiplomacy",
-      "Higaisa"
+      "AppleJeus"
     ],
     "top1": true,
     "top3": true,
@@ -202,7 +202,7 @@
     "predicted_top3": [
       "Winnti Group",
       "Play",
-      "BackdoorDiplomacy"
+      "FIN6"
     ],
     "top1": true,
     "top3": true,

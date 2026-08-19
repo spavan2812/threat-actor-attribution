@@ -1,5 +1,3 @@
-#Pull and Structure ETDA Threat Group Cards data
-
 import requests
 import json
 import os

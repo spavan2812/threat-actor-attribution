@@ -3,15 +3,16 @@ import json
 import os
 import torch
 
-#CySecBERT model 
-MODEL_NAME = "all-MiniLM-L6-v2"
+MODEL_NAME = "all-MiniLM-L6-v2"  
 EMBEDDINGS_PATH = "data/unified/actor_embeddings.pt"
 PROFILES_PATH = "data/unified/knowledge_base.json"
 
+
 def load_model():
-    print('Loading CySecBERT model...')
-    model= SentenceTransformer(MODEL_NAME)
-    print("Model Loaded.")
+    print(f'Loading semantic model: {MODEL_NAME}...')
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    model = SentenceTransformer(MODEL_NAME, device=device)
+    print(f"Model loaded on device: {device}")
     return model
 
 def build_actor_profile_text(actor):
@@ -29,9 +30,10 @@ def build_actor_profile_text(actor):
     if desc:
         parts.append(desc[:500])
 
+    
     country=actor.get("country", [])
     if country:
-        parts.append(f"Motivation: {', '.join(country)}")
+        parts.append(f"Country: {', '.join(country)}")
 
     motivation = actor.get("motivation", [])
     if motivation:
@@ -49,7 +51,7 @@ def build_actor_profile_text(actor):
     tools = actor.get("tools", [])
     if tools:
         if isinstance(tools[0], dict):
-            tools_names = [t.get("name", "") for t in tools[:10]]
+            tool_names = [t.get("name", "") for t in tools[:10]]
         else:
             tool_names = tools[:10]
         parts.append(f"Known tools: {', '.join(tool_names)}")
@@ -105,15 +107,16 @@ def load_actor_embeddings(model, profiles):
 def semantic_attribute(query_text, model, embeddings, profiles, top_n=5):
     """Main semantic attribution function.
     Encodes query text and finds most similar actor profiles"""
-    #Encode query
+    
+    BGE_QUERY_PREFIX = "Represent this sentence for searching relevant passages: "
     query_embedding=model.encode(
-        query_text, 
+        BGE_QUERY_PREFIX + query_text,
         convert_to_tensor=True
     )
-    #Compute cosine similarity against all actor profiles
+    
     similarities = util.cos_sim(query_embedding, embeddings)[0]
 
-    #Get top N results
+    
     top_indices = torch.topk(similarities, k=min(top_n, len(profiles)))
 
     results=[]
@@ -130,14 +133,14 @@ def semantic_attribute(query_text, model, embeddings, profiles, top_n=5):
     return results
 
 if __name__ == "__main__":
-    #Load Knowledge Base
+    
     with open(PROFILES_PATH, "r") as f:
         profiles = json.load(f)
 
     model=load_model()
     embeddings, valid_profiles = load_actor_embeddings(model, profiles)
 
-    # Test 1 - explicit description (same as baseline test)
+    
     print("\n" + "="*60)
     print("TEST 1 - Explicit tool names (APT29 expected)")
     print("="*60)

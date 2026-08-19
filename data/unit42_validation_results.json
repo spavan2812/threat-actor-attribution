@@ -1,0 +1,327 @@
+[
+  {
+    "id": "U1",
+    "expected": "Silent Librarian",
+    "predicted_top1": "OilRig",
+    "predicted_top3": [
+      "OilRig",
+      "Silent Librarian",
+      "CURIUM"
+    ],
+    "top1": false,
+    "top3": true,
+    "reciprocal_rank": 0.5
+  },
+  {
+    "id": "U2",
+    "expected": "Agrius",
+    "predicted_top1": "Moses Staff",
+    "predicted_top3": [
+      "Moses Staff",
+      "Agrius",
+      "OilRig"
+    ],
+    "top1": false,
+    "top3": true,
+    "reciprocal_rank": 0.5
+  },
+  {
+    "id": "U3",
+    "expected": "GALLIUM",
+    "predicted_top1": "Earth Lusca",
+    "predicted_top3": [
+      "Earth Lusca",
+      "Winnti Group",
+      "APT41"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "id": "U4",
+    "expected": "MuddyWater",
+    "predicted_top1": "OilRig",
+    "predicted_top3": [
+      "OilRig",
+      "CopyKittens",
+      "Magic Hound"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.2
+  },
+  {
+    "id": "U5",
+    "expected": "Threat Group-3390",
+    "predicted_top1": "Axiom",
+    "predicted_top3": [
+      "Axiom",
+      "BlackTech",
+      "Winnti Group"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.1
+  },
+  {
+    "id": "U6",
+    "expected": "APT29",
+    "predicted_top1": "OilRig",
+    "predicted_top3": [
+      "OilRig",
+      "Naikon",
+      "APT17"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.125
+  },
+  {
+    "id": "U7",
+    "expected": "Storm-1811",
+    "predicted_top1": "FIN8",
+    "predicted_top3": [
+      "FIN8",
+      "TA505",
+      "Wizard Spider"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "id": "U8",
+    "expected": "CURIUM",
+    "predicted_top1": "Play",
+    "predicted_top3": [
+      "Play",
+      "OilRig",
+      "Leafminer"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "id": "U9",
+    "expected": "Daggerfly",
+    "predicted_top1": "APT12",
+    "predicted_top3": [
+      "APT12",
+      "Axiom",
+      "Winnti Group"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "id": "U10",
+    "expected": "Play",
+    "predicted_top1": "FIN8",
+    "predicted_top3": [
+      "FIN8",
+      "FIN6",
+      "LAPSUS$"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "id": "U11",
+    "expected": "APT28",
+    "predicted_top1": "Molerats",
+    "predicted_top3": [
+      "Molerats",
+      "Strider",
+      "MONSOON"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.2
+  },
+  {
+    "id": "U12",
+    "expected": "Akira",
+    "predicted_top1": "FIN8",
+    "predicted_top3": [
+      "FIN8",
+      "APT-C-36",
+      "TA505"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "id": "U13",
+    "expected": "Volt Typhoon",
+    "predicted_top1": "APT41",
+    "predicted_top3": [
+      "APT41",
+      "Earth Lusca",
+      "APT5"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.16666666666666666
+  },
+  {
+    "id": "U14",
+    "expected": "Leviathan",
+    "predicted_top1": "Earth Lusca",
+    "predicted_top3": [
+      "Earth Lusca",
+      "Aquatic Panda",
+      "Axiom"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.1
+  },
+  {
+    "id": "U15",
+    "expected": "SideCopy",
+    "predicted_top1": "SideCopy",
+    "predicted_top3": [
+      "SideCopy",
+      "The White Company",
+      "Gorgon Group"
+    ],
+    "top1": true,
+    "top3": true,
+    "reciprocal_rank": 1.0
+  },
+  {
+    "id": "U16",
+    "expected": "Scattered Spider",
+    "predicted_top1": "Earth Lusca",
+    "predicted_top3": [
+      "Earth Lusca",
+      "APT-C-36",
+      "Molerats"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "id": "U17",
+    "expected": "Chimera",
+    "predicted_top1": "APT17",
+    "predicted_top3": [
+      "APT17",
+      "Taidoor",
+      "Naikon"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "id": "U18",
+    "expected": "Transparent Tribe",
+    "predicted_top1": "Sidewinder",
+    "predicted_top3": [
+      "Sidewinder",
+      "Patchwork",
+      "MONSOON"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.25
+  },
+  {
+    "id": "U19",
+    "expected": "Turla",
+    "predicted_top1": "APT29",
+    "predicted_top3": [
+      "APT29",
+      "Turla",
+      "Gamaredon Group"
+    ],
+    "top1": false,
+    "top3": true,
+    "reciprocal_rank": 0.5
+  },
+  {
+    "id": "U20",
+    "expected": "BlackByte",
+    "predicted_top1": "FIN8",
+    "predicted_top3": [
+      "FIN8",
+      "TA505",
+      "Wizard Spider"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "id": "U21",
+    "expected": "Sandworm Team",
+    "predicted_top1": "Patchwork",
+    "predicted_top3": [
+      "Patchwork",
+      "POLONIUM",
+      "APT-C-36"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "id": "U22",
+    "expected": "Winnti Group",
+    "predicted_top1": "APT41",
+    "predicted_top3": [
+      "APT41",
+      "Winnti Group",
+      "Earth Lusca"
+    ],
+    "top1": false,
+    "top3": true,
+    "reciprocal_rank": 0.5
+  },
+  {
+    "id": "U23",
+    "expected": "Mustang Panda",
+    "predicted_top1": "Naikon",
+    "predicted_top3": [
+      "Naikon",
+      "ZIRCONIUM",
+      "Taidoor"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "id": "U24",
+    "expected": "INC Ransom",
+    "predicted_top1": "Earth Lusca",
+    "predicted_top3": [
+      "Earth Lusca",
+      "Wizard Spider",
+      "TA505"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0
+  },
+  {
+    "id": "U25",
+    "expected": "Gamaredon Group",
+    "predicted_top1": "Strider",
+    "predicted_top3": [
+      "Strider",
+      "Patchwork",
+      "HEXANE"
+    ],
+    "top1": false,
+    "top3": false,
+    "reciprocal_rank": 0.0
+  }
+]

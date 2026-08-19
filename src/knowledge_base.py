@@ -1,9 +1,48 @@
-# Threat Actor Attribution System - Unified Knowledge Base
-# ELE8095 OO05 - Sai Pavan Yoganand
-# Purpose: Merge MITRE, MISP Galaxy, and ETDA into unified actor profiles
-
 import json
 import os
+from entity_extractor import SECTOR_KEYWORDS, MOTIVATION_KEYWORDS, extract_sectors
+
+def normalize_sectors(raw_sectors):
+    
+    canonical = set()
+    for raw in raw_sectors:
+        if not raw:
+            continue
+        raw_lower = raw.lower()
+        matched_any = False
+        for keyword, sector in SECTOR_KEYWORDS.items():
+            if keyword in raw_lower:
+                canonical.add(sector)
+                matched_any = True
+        if not matched_any:
+            canonical.add(raw.strip().title())
+    return sorted(canonical)
+
+
+
+KNOWN_BAD_MOTIVATION_VALUES = {
+    "iran (islamic republic of)", "china", "russia", "north korea",
+    "united states", "iran", "russian federation",
+}
+
+
+def normalize_motivation(raw_motivations):
+    
+    canonical = set()
+    for raw in raw_motivations:
+        if not raw:
+            continue
+        raw_lower = raw.strip().lower()
+        if raw_lower in KNOWN_BAD_MOTIVATION_VALUES:
+            continue
+        matched_any = False
+        for keyword, motivation in MOTIVATION_KEYWORDS.items():
+            if keyword in raw_lower:
+                canonical.add(motivation)
+                matched_any = True
+        if not matched_any:
+            canonical.add(raw.strip().title())
+    return sorted(canonical)
 
 def load_all_sources():
     """Load data from all three sources."""
@@ -42,7 +81,7 @@ def find_match(actor_name, aliases, index):
     primary name or any alias.
     Returns matched actor or None.
     """
-    # Try primary name first
+    
     if actor_name.lower().strip() in index:
         return index[actor_name.lower().strip()]
     
@@ -87,7 +126,7 @@ def merge_knowledge_base(mitre, misp, etda):
             "sources": ["MITRE"]
         }
 
-        # Try to find matching MISP entry
+        
         misp_match = find_match(actor["name"], actor.get("aliases", []), misp_index)
         if misp_match:
             misp_matches += 1
@@ -105,10 +144,13 @@ def merge_knowledge_base(mitre, misp, etda):
             
             if not profile["motivation"]:
                 motivation = misp_match.get("motivation", "")
-                profile["motivation"] = [motivation] if motivation else []
+                if motivation:
+                    profile["motivation"] = normalize_motivation([motivation])
             
             if not profile["target_sectors"]:
-                profile["target_sectors"] = misp_match.get("target_sectors", [])
+                misp_sectors = misp_match.get("target_sectors", [])
+                if misp_sectors:
+                    profile["target_sectors"] = normalize_sectors(misp_sectors)
             
             if not profile["target_countries"]:
                 profile["target_countries"] = misp_match.get("target_countries", [])
@@ -118,6 +160,10 @@ def merge_knowledge_base(mitre, misp, etda):
             
             if not profile["last_seen"]:
                 profile["last_seen"] = misp_match.get("last_seen", "")
+
+            
+            misp_desc = misp_match.get("description", "")
+            
 
         # Try to find matching ETDA entry
         etda_match = find_match(actor["name"], actor.get("aliases", []), etda_index)
@@ -130,10 +176,10 @@ def merge_knowledge_base(mitre, misp, etda):
                 profile["country"] = etda_match["country"]
             
             if etda_match.get("motivation"):
-                profile["motivation"] = etda_match["motivation"]
+                profile["motivation"] = normalize_motivation(etda_match["motivation"])
             
             if etda_match.get("target_sectors"):
-                profile["target_sectors"] = etda_match["target_sectors"]
+                profile["target_sectors"] = normalize_sectors(etda_match["target_sectors"])
             
             if etda_match.get("target_countries"):
                 profile["target_countries"] = etda_match["target_countries"]
@@ -146,8 +192,10 @@ def merge_knowledge_base(mitre, misp, etda):
             
             if etda_match.get("tools"):
                 profile["tools"] = etda_match["tools"]
+
             
-            # Merge ETDA aliases too
+            etda_desc = etda_match.get("description", "")
+           
             etda_aliases = [
                 n if isinstance(n, str) else n.get("name", "")
                 for n in etda_match.get("aliases", [])
@@ -164,9 +212,90 @@ def merge_knowledge_base(mitre, misp, etda):
     
     return unified
 
+
+
+CONFIRMED_SAFE_MERGES = {
+    "APT34": "OilRig",
+    "UNC2452": "APT29",
+    "Charming Kitten": "Magic Hound",
+}
+
+
+def merge_duplicate_actors(unified, merges=None):
+    
+    if merges is None:
+        merges = CONFIRMED_SAFE_MERGES
+
+    by_name = {a["name"]: a for a in unified}
+    removed = []
+
+    for duplicate_name, canonical_name in merges.items():
+        dup = by_name.get(duplicate_name)
+        canon = by_name.get(canonical_name)
+        if dup is None or canon is None:
+            print(f"  Skipping {duplicate_name} -> {canonical_name}: "
+                  f"one or both profiles not found")
+            continue
+
+        canon["aliases"] = sorted(set(canon.get("aliases", []))
+                                  | set(dup.get("aliases", []))
+                                  | {duplicate_name})
+
+        existing_ids = {t["technique_id"] for t in canon.get("ttps", [])}
+        for t in dup.get("ttps", []):
+            if t["technique_id"] not in existing_ids:
+                canon.setdefault("ttps", []).append(t)
+                existing_ids.add(t["technique_id"])
+        canon["ttp_count"] = len(canon.get("ttps", []))
+
+        canon["tools"] = sorted(set(canon.get("tools", []))
+                                | set(dup.get("tools", [])))
+        canon["target_sectors"] = sorted(set(canon.get("target_sectors", []))
+                                         | set(dup.get("target_sectors", [])))
+        canon["motivation"] = sorted(set(canon.get("motivation", []))
+                                     | set(dup.get("motivation", [])))
+        canon["country"] = sorted(set(canon.get("country", []))
+                                  | set(dup.get("country", [])))
+        canon["sources"] = sorted(set(canon.get("sources", []))
+                                  | set(dup.get("sources", [])))
+
+        removed.append(duplicate_name)
+        print(f"  Merged {duplicate_name} into {canonical_name} "
+              f"(now {canon['ttp_count']} TTPs, "
+              f"{len(canon['aliases'])} aliases)")
+
+    result = [a for a in unified if a["name"] not in removed]
+    print(f"\nMerged {len(removed)} confirmed-duplicate profiles. "
+          f"Total actors: {len(unified)} -> {len(result)}")
+    print("REMEMBER: regenerate embeddings before evaluating -- "
+          "merged profiles' text has changed.")
+    return result
+
+
+def backfill_sectors_from_description(unified):
+    
+    backfilled = 0
+    for actor in unified:
+        if not actor.get("target_sectors"):
+            extracted = extract_sectors(actor.get("description", ""))
+            if extracted:
+                actor["target_sectors"] = sorted(extracted)
+                backfilled += 1
+
+    print(f"Backfilled sector data for {backfilled} actors using "
+          f"MITRE description text (previously had none from "
+          f"structured MISP/ETDA data).")
+    return unified
+
+
 if __name__ == "__main__":
     mitre, misp, etda = load_all_sources()
     unified = merge_knowledge_base(mitre, misp, etda)
+
+    print("\nApplying confirmed-safe duplicate merges...")
+    unified = merge_duplicate_actors(unified)
+
+   
 
     os.makedirs("data/unified", exist_ok=True)
     with open("data/unified/knowledge_base.json", "w") as f:

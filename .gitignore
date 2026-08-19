@@ -22,3 +22,14 @@ data/malpedia/malpedia.json
 # OS files
 .DS_Store
 Thumbs.db
+
+# Third-party datasets/repos, not TRACE's own data
+cti_bench_repo/
+guru_dataset/
+dataset/
+
+# Runtime-generated IoC index, exceeds GitLab's file size limit
+# (2GB) -- load_ioc_index() in hybrid_engine.py degrades gracefully
+# and returns {} if this file is missing, so the system still runs
+# without it, just without IoC-engine contribution
+data/otx/ioc_actor_index.json
