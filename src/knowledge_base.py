@@ -45,7 +45,7 @@ def normalize_motivation(raw_motivations):
     return sorted(canonical)
 
 def load_all_sources():
-    """Load data from all three sources."""
+    
     with open("data/mitre/groups.json", "r") as f:
         mitre = json.load(f)
     with open("data/misp/actors.json", "r") as f:
@@ -57,10 +57,7 @@ def load_all_sources():
     return mitre, misp, etda
 
 def build_alias_index(actors, name_field="name", alias_field="aliases"):
-    """
-    Builds a dictionary mapping every known name and alias
-    to the actor's primary name. Used for cross-source matching.
-    """
+    
     index = {}
     for actor in actors:
         primary = actor.get(name_field, "").lower().strip()
@@ -76,11 +73,7 @@ def build_alias_index(actors, name_field="name", alias_field="aliases"):
     return index
 
 def find_match(actor_name, aliases, index):
-    """
-    Tries to find a matching actor in an index using
-    primary name or any alias.
-    Returns matched actor or None.
-    """
+   
     
     if actor_name.lower().strip() in index:
         return index[actor_name.lower().strip()]
@@ -94,11 +87,7 @@ def find_match(actor_name, aliases, index):
     return None
 
 def merge_knowledge_base(mitre, misp, etda):
-    """
-    Merges three sources into unified actor profiles.
-    MITRE is the primary source — every MITRE actor gets a profile.
-    MISP and ETDA data is merged in where matches are found.
-    """
+   
     print("Building alias indices...")
     misp_index = build_alias_index(misp)
     etda_index = build_alias_index(etda)
@@ -165,7 +154,7 @@ def merge_knowledge_base(mitre, misp, etda):
             misp_desc = misp_match.get("description", "")
             
 
-        # Try to find matching ETDA entry
+       
         etda_match = find_match(actor["name"], actor.get("aliases", []), etda_index)
         if etda_match:
             etda_matches += 1

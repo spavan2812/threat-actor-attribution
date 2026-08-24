@@ -5,8 +5,7 @@ import os
 print("Script started")
 
 def download_misp_galaxy():
-    """Downloads MISP Galaxy threat actor cluster"""
-
+   
     url="https://raw.githubusercontent.com/MISP/misp-galaxy/main/clusters/threat-actor.json"
     filepath="data/misp/threat-actor.json"
 
@@ -29,8 +28,7 @@ def download_misp_galaxy():
     return filepath
 
 def parse_misp_galaxy(filepath):
-    """Parses MISP Galaxy threat actor cluster.
-    Returns list of actor dictionaries"""
+    
 
     with open(filepath, "r", encoding="utf-8") as f:
         data=json.load(f)

@@ -53,8 +53,7 @@ def extract_ordered_techniques(text):
     for m in re.finditer(r'[Tt]\d{4}(?:\.\d{3})?', normalized):
         matches.append((m.start(), m.group().upper()))
 
-    # Prose keyword hints (e.g. "phishing" -> T1566), same mapping
-    # already validated in the main keyword engine
+    
     for keyword, ttp_id in TECHNIQUE_HINTS.items():
         start = 0
         while True:
@@ -105,8 +104,7 @@ def compute_phase_rarity_weights(actor_profiles):
 
     weights = {}
     for phase, count in doc_count.items():
-        # Standard IDF, floored so no phase is given literally zero
-        # credit -- even common phases carry some real signal
+       
         weights[phase] = max(0.1, math.log(total_sequences / count))
 
     _phase_rarity_weights_cache[cache_key] = weights

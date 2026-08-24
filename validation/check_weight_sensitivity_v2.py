@@ -33,16 +33,7 @@ def run_eval():
     return correct / n * 100, rr_sum / n
 
 
-# CORRECTED: mutate the actual ENGINE_WEIGHTS dict that
-# fuse_engine_scores reads via global lookup at call time. The
-# earlier version of this script mutated the standalone constants
-# (hybrid_engine.SEMANTIC_WEIGHT etc.), which was CONFIRMED, via
-# direct testing, to have zero effect -- ENGINE_WEIGHTS is built
-# once from those constants at module-import time and never
-# automatically refreshed afterward. Verified fix directly before
-# use: setting ENGINE_WEIGHTS["semantic"]=0.0 produced a real,
-# dramatic score change (APT29 90.19 -> 100.0, entirely different
-# runner-up actors), confirming this is the correct mechanism.
+
 
 DICT_KEY_MAP = {
     "SEMANTIC_WEIGHT": "semantic",

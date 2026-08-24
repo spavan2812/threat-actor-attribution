@@ -167,7 +167,6 @@ TEST_CASES = [
     },
 ]
 
-
 def evaluate(model, embeddings, semantic_profiles, groups,
              test_cases, malware_index=None, idf_weights=None,
              ioc_index=None, use_reranking=False):
@@ -199,14 +198,7 @@ def evaluate(model, embeddings, semantic_profiles, groups,
     print("-" * 75)
 
     for case in test_cases:
-        # idf_weights deliberately NOT passed here -- this is the
-        # main full-text pathway, already validated (documented
-        # finding from earlier in the project) to perform WORSE with
-        # IDF-weighted keyword scoring (60% -> 46.7% in that test).
-        # IDF weighting is scoped to the isolated TTP-only pathway
-        # only (see evaluate_partial_input below), where there is no
-        # semantic signal to already compensate for common-technique
-        # dilution.
+        
         results = hybrid_attribute(
             case["description"],
             model, embeddings, semantic_profiles, groups,
@@ -345,10 +337,6 @@ def evaluate_partial_input(model, embeddings, semantic_profiles, groups,
     by_name = {g["name"]: g for g in groups}
     rng = random.Random(seed)
 
-    # Reverse index: actor -> list of IoC values documented for them.
-    # Built once here rather than scanning all ~594k entries per
-    # test case. ioc_actor_index.json is keyed IoC -> {"actors": [...]},
-    # so this inverts it once, up front.
     actor_to_iocs = {}
     for ioc_value, entry in ioc_index.items():
         for actor in entry.get("actors", []):
@@ -375,7 +363,6 @@ def evaluate_partial_input(model, embeddings, semantic_profiles, groups,
         expected = case["expected"]
         entities = extract_entities(case["description"], malware_index)
 
-        # Condition A: full text (baseline, same as main evaluate())
         full_results = hybrid_attribute(
             case["description"], model, embeddings,
             semantic_profiles, groups,
@@ -385,10 +372,7 @@ def evaluate_partial_input(model, embeddings, semantic_profiles, groups,
         full_hit = bool(full_names) and full_names[0] == expected
         full_text_top1 += full_hit
 
-        # Condition B: TTPs only, no free text at all. Samples 3-5
-        # of the EXPECTED actor's own real documented techniques --
-        # genuinely representative of an analyst-identified TTP
-        # list, not a prose-derived approximation. See docstring.
+        
         actor_profile = by_name.get(expected, {})
         real_ttps = [t["technique_id"] for t in actor_profile.get("ttps", [])]
         ttp_hit = None
@@ -406,10 +390,7 @@ def evaluate_partial_input(model, embeddings, semantic_profiles, groups,
             ttp_hit = bool(ttp_names) and ttp_names[0] == expected
             ttp_only_top1 += bool(ttp_hit)
 
-        # Condition C: sectors only, no free text at all. Uses the
-        # EXPECTED actor's own real normalised sector data, same
-        # principle as above -- what an analyst who has confirmed
-        # the target's sector would actually submit.
+        
         real_sectors = set(actor_profile.get("target_sectors", []))
         sector_hit = None
         if real_sectors:
@@ -425,13 +406,6 @@ def evaluate_partial_input(model, embeddings, semantic_profiles, groups,
                 sector_names[0] == expected
             sector_only_top1 += bool(sector_hit)
 
-        # Condition D: IoCs only, no free text at all. Samples 3-5
-        # real indicators actually documented for the expected actor
-        # in the OTX-derived index -- same principle as TTP-only and
-        # sector-only above. Sampled uniformly across all indicators
-        # for that actor, exclusive or shared, since an analyst
-        # collecting IoCs during an investigation wouldn't know in
-        # advance which are exclusive to one actor.
         real_iocs = actor_to_iocs.get(expected, [])
         ioc_hit = None
         if real_iocs:
@@ -448,16 +422,7 @@ def evaluate_partial_input(model, embeddings, semantic_profiles, groups,
             ioc_hit = bool(ioc_names) and ioc_names[0] == expected
             ioc_only_top1 += bool(ioc_hit)
 
-        # Condition E: Sector + Motivation + Country combined, no
-        # free text at all. Uses the EXPECTED actor's own real
-        # normalised sector, motivation, AND country data together --
-        # a realistic combined-intel scenario (analyst has confirmed
-        # target sector, has an intent hypothesis, has a country
-        # hypothesis, but no narrative). Only fires if the actor has
-        # at least sector data (the dimension that was tied); an
-        # actor with sector data but no motivation/country simply
-        # tests sector+whatever's available, same principle as the
-        # other conditions degrading gracefully to what's real.
+       
         real_motivation = set(actor_profile.get("motivation", []))
         real_countries = set(actor_profile.get("country", []))
         combo_hit = None
@@ -534,10 +499,7 @@ if __name__ == "__main__":
     groups, idf_weights = load_groups_with_idf()
     model, embeddings, semantic_profiles = load_semantic_components()
 
-    # Loaded once here and threaded through every call below --
-    # hybrid_attribute() reloads this ~594k-entry file from disk on
-    # every call if not passed explicitly, which adds up fast across
-    # 15 test cases x multiple conditions x 2 evaluation runs.
+   
     print("Loading IoC index...")
     ioc_index = load_ioc_index()
 

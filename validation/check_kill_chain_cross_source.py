@@ -2,9 +2,6 @@ import os, sys, json
 sys.path.insert(0, "src")
 from kill_chain_sequencing import build_technique_phase_map, build_actor_phase_profiles, score_by_kill_chain
 
-# Build FULL profiles (all real Guru et al. data, no held-out split
-# needed -- the test cases below come from entirely different real
-# sources, so there's no leakage risk to guard against here).
 print("Building technique-to-phase map...")
 phase_map = build_technique_phase_map()
 
@@ -52,10 +49,7 @@ except Exception as e:
 
 print(f"Total real cases across all 3 sources: {len(all_cases)}\n")
 
-# Real profile names use Guru et al.'s own folder naming, which may
-# differ slightly from TRACE's canonical KB names (e.g. "Sandworm"
-# vs "Sandworm Team"). Map both directions so a real match isn't
-# missed purely due to naming.
+
 PROFILE_NAME_ALIASES = {
     "Sandworm Team": "Sandworm",
     "Winnti Group": "Winnti",

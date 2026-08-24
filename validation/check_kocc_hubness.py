@@ -6,13 +6,6 @@ import statistics
 
 model, embeddings, semantic_profiles = load_semantic_components()
 
-# Gather every real query text available across all test sets built
-# tonight -- genuinely diverse, independently-sourced queries, not
-# just actor-profile-to-actor-profile comparisons (which the algebra
-# shows are EXPECTED to correlate with centroid similarity -- see
-# 1/N * sum(x . y_i) = x . (1/N * sum(y_i)), a real critique raised
-# independently by two reviewers). k-occurrence across real, diverse
-# QUERIES is the standard, proper hubness measure.
 queries = []
 
 from evaluation import TEST_CASES
@@ -42,7 +35,7 @@ except Exception as e:
 
 print(f"Total real, diverse queries for k-occurrence analysis: {len(queries)}\n")
 
-K = 5  # standard choice for k-occurrence hubness analysis
+K = 5  
 occurrence_counts = Counter()
 
 for source, qid, text in queries:
@@ -59,13 +52,12 @@ expected_occurrence = (K * n_queries) / n_actors  # uniform-distribution baselin
 print(f"Expected k-occurrence under a UNIFORM (non-hub) distribution: "
       f"{expected_occurrence:.2f} per actor\n")
 
-# Real skewness of the k-occurrence distribution -- the standard,
-# proper hubness severity metric (not centroid correlation)
+
 all_counts = [occurrence_counts.get(p["name"], 0) for p in semantic_profiles]
 mean_count = statistics.mean(all_counts)
 std_count = statistics.pstdev(all_counts)
 
-# Pearson's moment skewness
+
 n = len(all_counts)
 skewness = (sum((c - mean_count) ** 3 for c in all_counts) / n) / (std_count ** 3) if std_count > 0 else 0
 

@@ -6,9 +6,7 @@ import statistics
 
 model, embeddings, semantic_profiles = load_semantic_components()
 
-# Same real, diverse query gathering as before, now WITH ground truth
-# tracked per query, so each top-5 appearance can be classified as a
-# genuine correct match or a false-positive hub appearance.
+
 queries = []  # (source, id, text, expected_actor)
 
 from evaluation import TEST_CASES

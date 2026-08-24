@@ -55,7 +55,7 @@ SECTOR_KEYWORDS = {
     "public administration": "Government",
 }
 
-# Korean diplomatic missions").
+
 GEOGRAPHY_KEYWORDS = {
     "poland": "Poland",
     "polish": "Poland",
@@ -186,7 +186,6 @@ def extract_sectors(text):
             found.add(sector)
     return list(found)
 
-r
 MOTIVATION_KEYWORDS = {
     "espionage": "Espionage",
     "intelligence gathering": "Espionage",
@@ -237,16 +236,7 @@ def extract_geographies(text):
     return list(found)
 
 
-# Real CTI reporting consistently signals ATTACKER ORIGIN with a
-# small, recognisable set of proximity words -- confirmed directly
-# against real reporting text: "Pakistan-based threat group",
-# "linked with the Belarusian government", "Iranian, state-sponsored,
-# cyberespionage group", "GRU-affiliated Russian threat cluster"
-# (Unit 42's own threat actor group descriptions; the last two
-# phrasings also verified directly against this project's own Thales
-# validation set test cases). Victim-location language such as
-# "targeted diplomatic missions in Seoul" never uses these words near
-# the country name.
+
 ORIGIN_INDICATORS = [
     "based", "linked", "sponsored", "attributed", "backed",
     "affiliated", "regime", "government", "intelligence",
@@ -327,8 +317,7 @@ def extract_iocs(text):
                    r'(?:25[0-5]|2[0-4]\d|[01]?\d?\d)\b'
     ips = re.findall(ipv4_pattern, normalised)
 
-    # Domains: word.word(.word...), deliberately excludes bare IPs
-    # (already caught above) and requires a plausible TLD length.
+   
     domain_pattern = r'\b(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}' \
                       r'[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}\b'
     domain_candidates = re.findall(domain_pattern, normalised)

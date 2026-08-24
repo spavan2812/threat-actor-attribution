@@ -14,10 +14,7 @@ RAW_BASE_URL = (
 
 IOC_INDEX_PATH = "data/otx/ioc_actor_index.json"
 
-# Same 7 test actors as otx_pipeline.py, plus known aliases —
-# matched against file/folder names in the repo (case-insensitive
-# substring match), since the repo organises files by actor/malware
-# name rather than a clean structured index.
+
 ACTOR_NAME_MATCHES = {
     "APT29": ["apt29", "cozybear", "cozy_bear", "cozy-bear"],
     "APT28": ["apt28", "fancybear", "sofacy"],
@@ -98,7 +95,7 @@ def fetch_and_parse(path):
 
 def build_carbonblack_index():
     files = list_repo_files()
-    # Only bother fetching files that look like data files
+    #
     data_files = [f for f in files
                   if f.endswith(('.csv', '.tsv', '.txt'))]
     matches = match_files_to_actors(data_files)
@@ -143,9 +140,7 @@ def build_carbonblack_index():
 if __name__ == "__main__":
     os.makedirs("data/otx", exist_ok=True)
 
-    # Load existing index (e.g. from otx_pipeline.py) to MERGE into,
-    # rather than overwrite — run this before or after otx_pipeline.py
-    # in either order, both contribute to the same combined index.
+   
     existing_index = {}
     if os.path.exists(IOC_INDEX_PATH):
         with open(IOC_INDEX_PATH, "r") as f:
@@ -155,8 +150,6 @@ if __name__ == "__main__":
 
     cb_index, per_actor_counts = build_carbonblack_index()
 
-    # Merge: for keys that exist in both, combine actor lists and
-    # sources rather than one overwriting the other
     for key, entry in cb_index.items():
         if key in existing_index:
             existing_actors = set(existing_index[key].get("actors", []))

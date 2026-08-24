@@ -2,27 +2,19 @@ import os
 import json
 from collections import defaultdict
 
-# Actors present in BOTH TRACE's evaluation set and Guru et al.'s
-# real dataset -- direct, fair overlap, no invented ground truth
 OVERLAPPING_ACTORS = {
     "APT28": "APT28",
     "APT29": "APT29",
     "Lazarus Group": "Lazarus Group",
     "Kimsuky": "Kimsuky",
     "OilRig": "OilRig",
-    "Sandworm": "Sandworm Team",   # their folder name -> TRACE's canonical name
+    "Sandworm": "Sandworm Team",   
     "Winnti Group": "Winnti Group",
 }
 
 
 def load_guru_dataset(base_path="guru_dataset/threat_actors_added_data"):
-    """
-    Loads real report text files from Guru et al.'s dataset folder
-    structure: {base_path}/{ActorFolderName}/*.txt
-
-    Returns list of (text, expected_actor_trace_name) tuples, only
-    for actors present in TRACE's own evaluation set.
-    """
+    
     cases = []
     for folder_name, trace_name in OVERLAPPING_ACTORS.items():
         actor_dir = os.path.join(base_path, folder_name)
@@ -149,10 +141,7 @@ if __name__ == "__main__":
           f"{len(set(c[1] for c in cases))} overlapping actors\n")
 
     if not cases:
-        print("\nNo cases loaded. Make sure the dataset is downloaded "
-              "from the Google Drive link in the repo README and "
-              "placed at guru_dataset/threat_actors_added_data/ "
-              "with per-actor subfolders.")
+        print("\nNo cases loaded.")
     else:
         results = run_benchmark(
             cases, hybrid_attribute, model, embeddings,

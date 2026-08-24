@@ -13,7 +13,6 @@ def load_groups_with_idf(filepath="data/unified/knowledge_base.json"):
     print(f"Computed IDF weights for {len(idf_weights)} techniques.")
     return groups, idf_weights
 
-# Mapping of common tools, malware, and keywords to ATT&CK technique IDs
 TOOL_TO_TTP = {
     # Execution tools
     "powershell": "T1059.001",
@@ -100,8 +99,7 @@ TOOL_TO_TTP = {
     "data destruction": "T1485",
 }
 
-# Tools/malware exclusively or strongly associated with specific actors
-# These give a direct actor signal beyond TTP matching
+
 import os
 
 # Load MITRE-sourced malware-actor index
@@ -117,9 +115,7 @@ def load_malware_actor_index():
         mitre_index = {}
         print("MITRE index not found — using hardcoded fallback only")
 
-    # Supplementary list for very recent tools not yet in MITRE ATT&CK
-    # These are documented in open-source CTI reports but not yet
-    # formally catalogued by MITRE
+    
     recent_tools = {
         "masepie": ["APT29"],
         "steelhook": ["APT29"],
@@ -131,7 +127,7 @@ def load_malware_actor_index():
         "cozy bear": ["APT29"],
     }
 
-    # Merge — MITRE index takes precedence for established tools
+    
     combined = {**recent_tools, **mitre_index}
     return combined
 
@@ -147,17 +143,17 @@ def extract_ttps_from_text(text, all_techniques):
     found_ttps = set()
     text_lower = text.lower()
 
-    # Method 1: Explicit ATT&CK IDs in text
+  
     explicit_ids = re.findall(r't\d{4}(?:\.\d{3})?', text_lower)
     for tid in explicit_ids:
         found_ttps.add(tid.upper())
 
-    # Method 2: Tool and malware name matching
+
     for tool_name, technique_id in TOOL_TO_TTP.items():
         if tool_name in text_lower:
             found_ttps.add(technique_id)
 
-    # Method 3: Exact full technique name matching
+
     for technique_id, technique_name, tactics in all_techniques:
         if len(technique_name) > 4:  # Skip very short names
             if technique_name.lower() in text_lower:
@@ -187,18 +183,12 @@ def build_technique_index(groups):
     return all_techniques
 
 def compute_idf_weights(groups):
-    """
-    Computes IDF weight for each ATT&CK technique.
-    Techniques used by few actors get high weight.
-    Techniques used by many actors get low weight.
-    IDF = log(total_actors / actors_using_technique)
-    """
     import math
 
     total_actors = len([g for g in groups if g["ttp_count"] > 0])
     technique_actor_count = {}
 
-    # Count how many actors use each technique
+    
     for group in groups:
         for ttp in group.get("ttps", []):
             tid = ttp["technique_id"]
@@ -206,8 +196,7 @@ def compute_idf_weights(groups):
                 technique_actor_count[tid] = \
                     technique_actor_count.get(tid, 0) + 1
 
-    # Compute IDF for each technique
-    # This block is OUTSIDE the for loop
+
     idf_weights = {}
     for tid, count in technique_actor_count.items():
         idf_weights[tid] = math.log(total_actors / count)
@@ -216,11 +205,7 @@ def compute_idf_weights(groups):
 
 def score_groups(groups, matched_ttps,
                  direct_actor_signals=None, idf_weights=None):
-    """
-    Scores each threat actor group based on TTP overlap.
-    Direct actor signals from exclusive tool attribution
-    receive maximum bonus — overriding TTP overlap scores.
-    """
+    
     if direct_actor_signals is None:
         direct_actor_signals = set()
 
@@ -239,19 +224,10 @@ def score_groups(groups, matched_ttps,
 
         group_ttps = set(t["technique_id"] for t in group["ttps"])
 
-        # Exact matches first
         exact_overlap = matched_ttps.intersection(group_ttps) \
             if matched_ttps else set()
 
-        # FAMILY-LEVEL matches: a base technique (e.g. query has
-        # "T1071") should match an actor profile that only has a
-        # specific sub-technique (e.g. actor has "T1071.001"), and
-        # vice versa. Real, confirmed bug: exact-string matching
-        # alone was causing actors to show ZERO overlap with their
-        # own real test cases purely because MITRE documents them at
-        # a different technique-ID granularity (base vs sub-
-        # technique) than what got extracted from the query text --
-        # not a genuine absence of the behaviour.
+        
         family_overlap = set()
         if matched_ttps:
             query_families = {technique_family(t) for t in matched_ttps}
@@ -274,15 +250,7 @@ def score_groups(groups, matched_ttps,
             if not alias_match:
                 continue
 
-        # IDF-weighted overlap score: rare, specific techniques
-        # count more than ubiquitous ones (phishing, PowerShell)
-        # nearly every actor shares. Falls back to simple ratio
-        # if no idf_weights provided. DELIBERATELY different from
-        # the earlier tested finding that IDF weighting hurts the
-        # FULL fused system (60%->46.7%) -- that test had the
-        # semantic engine active to compensate; this specifically
-        # targets the TTP-only pathway, a genuinely different
-        # scoring regime with zero semantic signal to fall back on.
+        
         if matched_ttps and idf_weights:
             matched_weight_sum = sum(
                 idf_weights.get(t, 1.0) for t in matched_ttps
@@ -296,10 +264,7 @@ def score_groups(groups, matched_ttps,
             ttp_score = len(overlap) / len(matched_ttps) \
                 if matched_ttps else 0
 
-        # Direct signal is definitive — exclusive tool match
-        # overrides TTP overlap scoring (dead-code fix applied:
-        # the old 0.5 default was always immediately overwritten
-        # by the check below, so it never had any real effect)
+      
         actor_bonus = 0
         if group["name"] in direct_actor_signals:
             actor_bonus = 1.0
@@ -360,7 +325,7 @@ def attribute(text, groups=None, top_n=5):
 
 
 if __name__ == "__main__":
-    # Test with the same description from the LinkedIn POC
+    
     test_description = """
     Spear phishing emails were sent to government ministry employees 
     containing malicious Word documents with embedded macros. Upon 

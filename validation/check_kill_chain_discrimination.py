@@ -21,13 +21,6 @@ for actor_folder in os.listdir(BASE_PATH):
     files = [f for f in os.listdir(actor_dir) if f.endswith(".txt")]
     all_files[actor_folder] = files
 
-# Proper held-out split: for each actor with enough real data, hold
-# out HELD_OUT_PER_ACTOR real reports as test cases, build the
-# profile ONLY from the remaining reports -- no data leakage between
-# what's tested and what the profile was built from. No cap this
-# time -- keeping all real data, relying on score_by_kill_chain's
-# log(N) penalty to correct for profile-size bias instead of
-# discarding real sequences.
 rng = random.Random(42)
 train_profiles = {}
 test_cases = []  # list of (actor, filepath)

@@ -1,7 +1,3 @@
-# Threat Actor Attribution System - Hybrid Engine
-# ELE8095 OO05 - Sai Pavan Yoganand
-# Purpose: Combines keyword baseline with semantic similarity
-
 import json
 import os
 import re
@@ -15,7 +11,6 @@ from attribution_engine import (
 )
 from entity_extractor import extract_entities, extract_iocs
 
-# Weights for combining scores
 KEYWORD_WEIGHT = 0.35
 SEMANTIC_WEIGHT = 0.65
 SECTOR_WEIGHT = 0.10
@@ -82,9 +77,7 @@ def fuse_engine_scores(engine_outputs, base_weights=None):
         )
     return combined
 
-MODEL_NAME = "all-MiniLM-L6-v2"  # reverted from jina-embeddings-v5-text-small; MUST match
-# semantic_engine.py's MODEL_NAME exactly -- embeddings built with
-# one model are incompatible with queries encoded by a different one.
+MODEL_NAME = "all-MiniLM-L6-v2"  
 EMBEDDINGS_PATH = "data/unified/actor_embeddings.pt"
 PROFILES_PATH = "data/unified/knowledge_base.json"
 
@@ -102,10 +95,6 @@ def load_semantic_components():
     """
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Loading semantic components on device: {device}...")
-    # NOTE: correct as-is for all-MiniLM-L6-v2. If switching back to
-    # jina-embeddings-v5-text-small, restore trust_remote_code=True
-    # and model_kwargs={"default_task": "text-matching"} -- see
-    # semantic_engine.py for why.
     model = SentenceTransformer(MODEL_NAME, device=device)
 
     save_data = torch.load(EMBEDDINGS_PATH, weights_only=False)
@@ -124,33 +113,7 @@ def load_semantic_components():
 
 
 def get_semantic_scores(query_text, model, embeddings, profiles):
-    """
-    Returns a dictionary of actor_name -> semantic_score for all
-    actors, using plain cosine similarity.
-
-    REAL BUG FOUND AND FIXED (found during a full-codebase audit): a
-    BGE-specific query instruction prefix ("Represent this sentence
-    for searching relevant passages: ") was left in this function
-    from an abandoned BGE-base-en-v1.5 model-swap experiment.
-    MODEL_NAME was correctly reverted back to all-MiniLM-L6-v2 after
-    that experiment did not resolve the hubness problem, but this
-    prefix-prepending code was never removed alongside it -- meaning
-    every query, in every evaluation run since that revert, was
-    having an irrelevant BGE-formatted instruction string silently
-    prepended before being embedded by a model (MiniLM) never trained
-    to expect it. Removed.
-
-    Two post-hoc hubness-correction techniques were tried and
-    reverted after real testing: global centering and CSLS. Both
-    independently produced the same regression on the real
-    evaluation suite (Top-1 73.3% -> 66.7%, MRR 0.822 -> 0.711) with
-    no meaningful improvement on external validation sets. A
-    source-text correction (stripping generic templated language)
-    was also tried and found not to reduce hubness at all
-    (correlation between hub-ness and centroid proximity remained
-    ~1.0, just shifted which actors were hubs). A BGE-base-en-v1.5
-    model swap was also tried and reverted for the same reason.
-    """
+    
     query_embedding = model.encode(
         query_text,
         convert_to_tensor=True
@@ -168,26 +131,7 @@ def get_semantic_scores(query_text, model, embeddings, profiles):
 def get_keyword_scores(query_text, groups,
                        malware_index=None, idf_weights=None,
                        direct_ttps=None):
-    """
-    Uses entity extractor to pull structured signals from text,
-    then scores actors using TTP overlap scoring. Also accepts
-    direct_ttps — a set of ATT&CK technique IDs supplied directly
-    by the analyst (bypassing free text entirely), for the case
-    where someone already has a structured TTP list, e.g. exported
-    from a SIEM or CTI platform, and no incident description at all.
-    Direct signals from exclusive tools receive maximum score.
-
-    Also computes tool_scores separately: shared (non-exclusive)
-    tool matches -- e.g. a malware family used by several different
-    actors -- are real CTI evidence but weaker than an exclusive
-    match. Previously these were extracted by entity_extractor but
-    then silently discarded, since only exclusive matches fed
-    direct_actor_signals and nothing else consumed entities["tools"].
-    Returned as its own dict so hybrid_attribute() can register it
-    as an independent engine with its own weight, mirroring how
-    get_ioc_scores() already handles shared IoC matches (split
-    credit among the actors rather than dropping the signal).
-    """
+    
     if malware_index is None:
         malware_index = {}
     if direct_ttps is None:
@@ -195,37 +139,16 @@ def get_keyword_scores(query_text, groups,
 
     query_text = query_text or ""
 
-    # Extract entities from text (safe on empty string — just
-    # returns empty results for every category)
+    
     entities = extract_entities(query_text, malware_index)
 
-    # Combine TTPs mentioned in free text with any supplied directly
+    
     matched_ttps = set(entities["explicit_ttps"]) | set(direct_ttps)
 
-    # Get direct actor signals from entity extractor
+    
     direct_actor_signals = set(entities["direct_actor_signals"])
 
-    # Also check TOOL_TO_ACTOR for recent tools not in MITRE index.
-    #
-    # REAL BUG FOUND AND FIXED: this loop previously had NO length
-    # guard at all, unlike extract_tools() (which requires
-    # len(tool_name) > 5). TOOL_TO_ACTOR contains short, legitimate
-    # tool names -- "net", "at", "ping", "reg", "tor", "page", "lv",
-    # "disco" (real Windows living-off-the-land binaries and short
-    # malware family abbreviations) -- that are also common English
-    # words or common substrings of unrelated words. Confirmed via
-    # direct testing: "disco" matched inside a scraped webpage's
-    # unrelated "trending articles" sidebar junk (almost certainly
-    # matching inside a word like "discovered"), silently triggering
-    # an exclusive-match +0.25 direct-signal boost for an unrelated
-    # actor (MoustachedBouncer) on a real Kimsuky report. Since this
-    # loop runs on every single query through get_keyword_scores, it
-    # could have been quietly injecting false direct-signal boosts
-    # across every evaluation run tonight, not just this one case.
-    #
-    # Fixed with the same length guard already used in extract_tools(),
-    # plus word-boundary matching (so "net" doesn't match inside
-    # "internet" or "Netscout") rather than raw substring matching.
+   
     text_lower = query_text.lower()
     for tool_name, actor_names in TOOL_TO_ACTOR.items():
         if len(tool_name) <= 3:
@@ -249,13 +172,7 @@ def get_keyword_scores(query_text, groups,
     for r in results:
         scores[r["name"]] = r["score"] / 100.0
 
-    # Shared (non-exclusive) tool matches: real evidence, weaker than
-    # a direct/exclusive signal, but previously thrown away entirely
-    # once extract_tools found >1 associated actor. Mirrors
-    # get_ioc_scores' shared-match handling -- split credit among the
-    # actors rather than discarding it. Kept as its own engine output
-    # (not merged into keyword_scores) so it gets its own weight and
-    # its own ablation sweep, same discipline as sector/motivation/IoC.
+    
     tool_scores = {}
     for tool_name, actors in entities["tools"].items():
         if isinstance(actors, list) and len(actors) > 1:
@@ -270,20 +187,7 @@ _sector_idf_cache = {}
 
 
 def compute_sector_idf(groups):
-    """
-    Computes IDF-style rarity weights per sector, same principle as
-    attribution_engine.py's technique IDF weights: a sector shared by
-    many actors (e.g. "Government", present in ~91/186 actors) is a
-    weak discriminating signal; a rare sector (e.g. "Petroleum",
-    present in 1 actor) is a strong one. Verified against real data:
-    rarity-weighted sector scoring improved sector-only Top-1 from
-    20% to 25% on the real test set, versus unweighted overlap
-    scoring which treats "Government" and "Petroleum" as equally
-    informative.
-
-    Cached per groups object id, since this only needs computing
-    once per knowledge base load, not per query.
-    """
+   
     cache_key = id(groups)
     if cache_key in _sector_idf_cache:
         return _sector_idf_cache[cache_key]
@@ -304,20 +208,7 @@ def compute_sector_idf(groups):
 
 
 def get_sector_scores(query_sectors, groups, sector_idf=None):
-    """
-    Scores each actor on overlap between the sectors extracted from
-    the query text and the actor's normalised target_sectors.
-
-    When sector_idf is provided (computed once via
-    compute_sector_idf), uses RARITY-WEIGHTED overlap -- a match on
-    a rare, specific sector counts far more than a match on a broad
-    one nearly every state-linked actor shares. Falls back to simple
-    unweighted overlap ratio if sector_idf is None, for backward
-    compatibility.
-
-    Returns an empty dict (no signal) if the query has no extractable
-    sector mentions.
-    """
+    
     if not query_sectors:
         return {}
 
@@ -343,18 +234,7 @@ def get_sector_scores(query_sectors, groups, sector_idf=None):
 
 
 def get_motivation_scores(query_motivation, groups):
-    """
-    Scores each actor on overlap between the motivation category
-    extracted from the query text (Espionage / Financial /
-    Sabotage-Destruction) and the actor's own normalised motivation.
-
-    Diagnosed use case: distinguishes actors sharing near-identical
-    country/sector/semantic profiles but genuinely different intent
-    -- e.g. Sandworm Team (Sabotage/Destruction) vs its semantic
-    confuser Inception (Espionage), a real signal no other engine
-    currently uses. Returns an empty dict (no signal) if the query
-    text has no extractable motivation language.
-    """
+   
     if not query_motivation:
         return {}
 
@@ -369,34 +249,7 @@ def get_motivation_scores(query_motivation, groups):
 
 
 def get_country_scores(query_countries, groups):
-    """
-    Scores each actor on overlap between country/geography mentions
-    extracted from the query text (or supplied directly) and the
-    actor's own normalised country field.
-
-    Diagnosed use case: a real 20-actor exact-tie cluster on sector
-    data alone (all tagged only ['Government','Private Sector'],
-    including APT29, Lazarus Group, Sandworm Team, and Kimsuky from
-    the evaluation set) was found to collapse to 9 subgroups when
-    motivation is added, and further to a largest remaining group of
-    just 7 when country is added on top -- measured directly against
-    real knowledge base data, not assumed. No new external source
-    needed: country data was already present in every actor profile,
-    just never scored.
-
-    Some knowledge base entries carry bracketed placeholder values
-    (e.g. "[Unknown]", "[South Asia]", "[Gaza]") for actors without
-    a confirmed single-nation attribution. These simply won't match
-    any extracted geography keyword (which are always plain country
-    names, e.g. "Russia", "China" -- see entity_extractor.py's
-    GEOGRAPHY_KEYWORDS), which is correct, honest behaviour: an
-    actor with no confirmed single-nation origin genuinely can't be
-    validated against a specific country mention, rather than a bug
-    to work around.
-
-    Returns an empty dict (no signal) if the query has no
-    extractable country/geography mentions.
-    """
+    
     if not query_countries:
         return {}
 
@@ -422,19 +275,7 @@ def load_ioc_index():
 
 
 def get_ioc_scores(query_iocs, ioc_index):
-    """
-    Scores each actor on IoC matches between the IoCs found in the
-    query (extracted from free text, or supplied directly) and the
-    OTX-derived ioc_actor_index. Mirrors the exclusive-tool-signal
-    logic in attribution_engine.score_groups: an IoC seen linked to
-    exactly one actor is a strong signal; an IoC linked to multiple
-    actors (shared infrastructure, or a coincidental false positive
-    match) contributes a weaker, shared score instead of a direct one.
-
-    query_iocs: flat list/set of raw IoC values (any of the three
-        types — the index itself carries the type, so the caller
-        doesn't need to pre-sort them).
-    """
+    
     if not query_iocs or not ioc_index:
         return {}, set()
 
@@ -449,13 +290,11 @@ def get_ioc_scores(query_iocs, ioc_index):
 
         actors = entry.get("actors", [])
         if len(actors) == 1:
-            # Exclusive match — same reasoning as an exclusive tool
-            # in attribution_engine.py's direct-signal logic
+            
             direct_signals.add(actors[0])
             scores[actors[0]] = 1.0
         else:
-            # Shared across multiple actors — real but weaker
-            # evidence, split among the actors it was seen with
+            
             for actor in actors:
                 scores[actor] = max(scores.get(actor, 0.0),
                                     1.0 / len(actors))
@@ -466,59 +305,7 @@ def get_ioc_scores(query_iocs, ioc_index):
 def assess_attribution_confidence(ranked, top_support_count=None,
                                    cluster_threshold=0.90,
                                    min_supporting_engines=4):
-    """
-    Assesses whether the top-ranked attribution is confidently
-    distinguishable from its closest competitors, or whether the
-    evidence leaves genuine ambiguity among multiple candidates.
-
-    SCOPE, STATED PLAINLY: this does NOT detect false flag
-    operations directly. No automated text-based system can
-    definitively confirm a false flag from CTI report text alone --
-    that requires independent, out-of-band evidence (infrastructure
-    reuse, OPSEC failures, signals intelligence) beyond what any
-    text-based attribution engine can access. What this DOES provide
-    is real, evidence-based AMBIGUITY DETECTION.
-
-    REAL, EVIDENCE-DRIVEN REVISION (important -- read before
-    changing thresholds): an earlier version of this function used
-    ONLY score-cluster separation (is the top candidate clearly
-    isolated from its closest competitors) to decide confidence.
-    Tested directly against 47 real, external report cases (CTIBench
-    CTI-TAA), that alone was a coin flip: 12 of 24 "high-confidence"
-    predictions were WRONG (50%). Root cause, confirmed by direct
-    measurement: embedding-space hubness (see the semantic-scoring
-    history elsewhere in this file) can produce a clear, isolated,
-    decisive-LOOKING score lead purely from structural bias, with no
-    genuine multi-engine evidence behind it -- exactly the failure
-    mode score-cluster-only confidence cannot distinguish from a
-    real, well-evidenced win.
-
-    Fix, grounded in the same real test: high-confidence CORRECT
-    predictions averaged 3.42 independent NON-SEMANTIC engines
-    (keyword, tool, sector, motivation, country, ioc) corroborating
-    the winner; high-confidence WRONG predictions averaged only 2.17,
-    and critically, ZERO of the 12 wrong predictions had 4 or more
-    non-semantic engines agreeing, while 8 of 12 correct predictions
-    did. "High" confidence now requires BOTH genuine score separation
-    AND real multi-engine corroboration -- specifically to guard
-    against hub-driven false confidence, the single largest risk
-    identified in tonight's entire investigation.
-
-    top_support_count: count of non-semantic engines that produced a
-    real (>0) score for the winning candidate specifically. Must be
-    supplied by the caller (hybrid_attribute has direct access to the
-    per-engine score dicts needed to compute this; this function does
-    not). If None, falls back to score-cluster-only assessment (with
-    an explicit note in the reasoning that engine support wasn't
-    checked), rather than silently assuming high confidence.
-
-    min_supporting_engines: minimum non-semantic engine count
-    required for "high" confidence, regardless of how isolated the
-    score looks. Set to 4 based on the real evidence above.
-
-    Returns a dict: confidence ("high"/"low"), top_cluster (list of
-    (name, score) tuples), reasoning (short human-readable string).
-    """
+    
     if not ranked:
         return {
             "confidence": "high",
@@ -559,10 +346,7 @@ def assess_attribution_confidence(ranked, top_support_count=None,
             ),
         }
 
-    # Score is isolated -- but isolation alone was proven (via real
-    # external testing) to be an unreliable confidence signal on its
-    # own, since embedding hubness can fake it. Require genuine
-    # multi-engine corroboration too.
+    
     if top_support_count is None:
         return {
             "confidence": "high",
@@ -612,29 +396,7 @@ def hybrid_attribute(query_text=None, model=None, embeddings=None,
                      direct_iocs=None, ioc_index=None,
                      direct_motivation=None, direct_countries=None,
                      engine_weights=None):
-    """
-    Main hybrid attribution function. Dispatches to whichever
-    scoring engines are actually applicable given the input
-    provided, then combines their outputs via the fusion layer.
-
-    Supports partial input in any combination:
-      - query_text alone (the original use case: free-text
-        description, everything derived from it)
-      - direct_ttps alone, with no query_text at all (analyst
-        already has a structured technique list, e.g. exported
-        from a SIEM, and no incident narrative to write)
-      - direct_sectors alone, or combined with either of the above
-      - direct_motivation and/or direct_countries, alone or combined
-        with any of the above (e.g. an analyst who knows the target
-        sector, suspects the intent, and has a country hypothesis,
-        but no narrative text at all)
-      - any combination of all five together
-
-    The semantic engine only runs if query_text is actually
-    provided — there is no meaningful text to embed otherwise, and
-    running it anyway would inject a near-random similarity score
-    into the fusion rather than correctly contributing nothing.
-    """
+    
     if malware_index is None:
         malware_index = {}
     if direct_ttps is None:
@@ -670,50 +432,29 @@ def hybrid_attribute(query_text=None, model=None, embeddings=None,
     if keyword_scores:
         engine_outputs["keyword"] = keyword_scores
 
-    # Tool engine: shared (non-exclusive) tool/malware-family matches.
-    # Exclusive matches already flow into direct_signals above and
-    # get the additive direct-signal boost further down; this engine
-    # covers the previously-discarded case where a tool is real
-    # evidence but tied to more than one candidate actor.
+    
     if tool_scores:
         engine_outputs["tool"] = tool_scores
 
-    # Sector engine: fires on extracted-from-text sectors, direct
-    # sector input, or both combined. sector_idf is computed once
-    # and cached per groups object (see compute_sector_idf), so this
-    # doesn't recompute rarity weights on every single query.
+   
     query_sectors = set(entities["sectors"]) | set(direct_sectors)
     sector_idf = compute_sector_idf(groups)
     sector_scores = get_sector_scores(query_sectors, groups, sector_idf=sector_idf)
     if sector_scores:
         engine_outputs["sector"] = sector_scores
 
-    # Motivation engine: fires on extracted-from-text motivation
-    # language, direct motivation input, or both combined
     query_motivation = set(entities["motivation"]) | set(direct_motivation)
     motivation_scores = get_motivation_scores(query_motivation, groups)
     if motivation_scores:
         engine_outputs["motivation"] = motivation_scores
 
-    # Country engine: fires on extracted-from-text ORIGIN country
-    # mentions specifically (see entity_extractor.extract_origin_
-    # countries), direct country input, or both combined. Uses
-    # origin_countries rather than the broader geographies field --
-    # geographies matches ANY country mentioned, including victim
-    # locations, which was found (real evidence: Thales validation
-    # case T5) to wrongly reward actors based in a victim's country
-    # rather than the attacker's actual origin. See
-    # get_country_scores docstring for the original tie-breaking
-    # motivation behind this engine.
+    
     query_countries = set(entities["origin_countries"]) | set(direct_countries)
     country_scores = get_country_scores(query_countries, groups)
     if country_scores:
         engine_outputs["country"] = country_scores
 
-    # IoC engine: fires on extracted-from-text IoCs, direct IoC
-    # input, or both combined. Requires ioc_index to be built
-    # first (see otx_pipeline.py) — with no index yet, this
-    # correctly produces no signal rather than erroring out.
+  
     text_iocs = extract_iocs(query_text) if query_text else \
         {"ips": [], "domains": [], "hashes": []}
     query_iocs = (set(text_iocs["ips"]) | set(text_iocs["domains"]) |
@@ -725,18 +466,13 @@ def hybrid_attribute(query_text=None, model=None, embeddings=None,
         engine_outputs["ioc"] = ioc_scores
     direct_signals = direct_signals | ioc_direct_signals
 
-    # If nothing fired at all — no text, no TTPs, no sectors —
-    # there is genuinely nothing to attribute from. Return early
-    # rather than proceeding with an empty, meaningless ranking.
+  
     if not engine_outputs:
         return []
 
     fused = fuse_engine_scores(engine_outputs, base_weights=engine_weights)
 
-    # Direct signal boost is applied additively, on top of the
-    # fused score, rather than folded into the weighted blend —
-    # an exclusive tool match is treated as near-decisive evidence
-    # regardless of which other engines fired.
+   
     combined = {}
     for name, score in fused.items():
         base = score
@@ -744,21 +480,10 @@ def hybrid_attribute(query_text=None, model=None, embeddings=None,
             base = base + 0.25
         combined[name] = min(base, 1.0)
 
-    # Deterministic tie-break: when scores are exactly equal (a real,
-    # honest outcome -- e.g. two actors sharing identical documented
-    # sector/motivation/country data), fall back to alphabetical
-    # actor name rather than Python's per-process hash-seed-dependent
-    # set ordering. Without this, identical inputs could silently
-    # rank tied actors differently across separate runs, making
-    # reported accuracy numbers non-reproducible.
+    
     ranked = sorted(combined.items(), key=lambda x: (-x[1], x[0]))
 
-    # Ambiguity / false-flag risk assessment -- computed once on the
-    # full ranked list before truncating to top_n. Requires the top
-    # candidate's non-semantic engine support count (see
-    # assess_attribution_confidence's docstring for why score
-    # isolation alone was proven unreliable via real external
-    # testing).
+   
     top_support_count = None
     if ranked:
         top_name_for_support = ranked[0][0]
@@ -803,14 +528,7 @@ def hybrid_attribute(query_text=None, model=None, embeddings=None,
             "country": profile.get("country", []),
             "motivation": profile.get("motivation", []),
             "direct_signal": name in direct_signals,
-            # New: ambiguity / false-flag-risk fields. "confidence"
-            # and "reasoning" are the same for every entry in a given
-            # call (they describe the overall attribution's
-            # reliability, not a per-actor property) -- repeated on
-            # each result for convenience so callers reading a single
-            # result dict don't need to separately track the overall
-            # assessment. in_top_cluster marks which specific
-            # candidates are part of the genuinely-competitive group.
+            
             "attribution_confidence": confidence_assessment["confidence"],
             "confidence_reasoning": confidence_assessment["reasoning"],
             "in_top_cluster": name in top_cluster_names,
@@ -822,28 +540,13 @@ def hybrid_attribute(query_text=None, model=None, embeddings=None,
     return results
 
 
-# Cross-encoder reranking stage. Unlike the bi-encoder semantic engine
-# above (which encodes query and actor profile INDEPENDENTLY, then
-# compares fixed vectors via cosine similarity), a cross-encoder
-# processes both texts TOGETHER through the model, letting them
-# attend to each other directly. This is specifically well-suited to
-# cases where two candidates share identical structured data (country,
-# motivation, sector) and the only remaining discriminating signal is
-# subtle phrasing in the actual prose -- exactly the diagnosed failure
-# pattern for APT29 vs Inception.
-#
-# Standard two-stage pattern: the existing hybrid_attribute() above
-# still does all the real work (semantic + keyword + sector +
-# motivation + IoC fusion) to produce a shortlist. This stage ONLY
-# reranks that shortlist -- it does not replace the fusion pipeline,
-# since cross-encoders can't be run against all 186 actors for every
-# query as cheaply as a precomputed-embedding cosine comparison.
+
 CROSS_ENCODER_MODEL = "cross-encoder/ms-marco-MiniLM-L-6-v2"
 _cross_encoder_cache = {}
 
 
 def load_cross_encoder():
-    """Loads (once, cached) the cross-encoder reranking model."""
+   
     if CROSS_ENCODER_MODEL not in _cross_encoder_cache:
         device = "cuda" if torch.cuda.is_available() else "cpu"
         print(f"Loading cross-encoder reranker on device: {device}...")
@@ -854,12 +557,7 @@ def load_cross_encoder():
 
 
 def build_rerank_text(profile):
-    """
-    Builds the text representation of an actor profile used for
-    cross-encoder pairing. Kept simple and self-contained here
-    rather than importing semantic_engine.py's profile-text builder,
-    to avoid a circular dependency between the two modules.
-    """
+    
     parts = [profile.get("name", "")]
     if profile.get("description"):
         parts.append(profile["description"])
@@ -873,36 +571,8 @@ def build_rerank_text(profile):
 def rerank_with_cross_encoder(query_text, results, semantic_profiles,
                               cross_encoder=None, rerank_top_k=10,
                               blend_weight=0.3):
-    # blend_weight=0.3 is a provisional starting default based on a
-    # real (small-scale) sweep against one diagnosed hard case, NOT
-    # yet properly ablation-tested -- same discipline as every other
-    # new weight added tonight (sector/motivation/IoC all started
-    # this way before their own validated sweep). Needs a real
-    # ablation pass before being trusted as final.
-    """
-    Reranks the top rerank_top_k candidates from hybrid_attribute()'s
-    results using a cross-encoder, BLENDED with the original fusion
-    score (not replacing it). The cross-encoder only sees raw profile
-    text -- it has no awareness of TTP, sector, motivation, or IoC
-    signal, all of which the original combined_score already
-    incorporates. A full override would throw that structured signal
-    away; blending keeps both contributing.
-
-    blend_weight controls how much the cross-encoder's opinion counts
-    relative to the original fusion score (0.5 = equal weight).
-    Cross-encoder raw scores are normalised via MIN-MAX across just
-    this shortlist, not a fixed sigmoid -- sigmoid collapses badly
-    when every candidate's raw score happens to land in the same
-    tail of the curve (e.g. all strongly negative), squashing them
-    all to a near-identical tiny value and silently erasing their
-    relative differences. Min-max preserves whatever real spread
-    exists among the actual candidates being compared, regardless of
-    their absolute scale.
-
-    Candidates beyond rerank_top_k keep their original ordering,
-    appended after the reranked set. With no query_text, returns
-    results unchanged -- nothing meaningful to rerank against.
-    """
+    
+   
     if not query_text or not query_text.strip() or not results:
         return results
 
@@ -923,14 +593,7 @@ def rerank_with_cross_encoder(query_text, results, semantic_profiles,
     raw_scores = [float(s) for s in cross_encoder.predict(pairs)]
     fusion_scores = [r["combined_score"] for r in to_rerank]
 
-    # Symmetric min-max normalisation on BOTH sides -- dividing
-    # fusion by a fixed /100 while min-max-stretching the cross-
-    # encoder side is an asymmetry that let the cross-encoder
-    # dominate almost regardless of blend_weight whenever fusion
-    # scores happened to cluster tightly together (a real, tested
-    # failure mode: at blend_weight=0.1, the cross-encoder's answer
-    # still won outright). Min-max on both sides means blend_weight
-    # actually controls the balance as intended.
+   
     ce_min, ce_max = min(raw_scores), max(raw_scores)
     ce_range = ce_max - ce_min
     f_min, f_max = min(fusion_scores), max(fusion_scores)

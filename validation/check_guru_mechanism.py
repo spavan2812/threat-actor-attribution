@@ -1,6 +1,4 @@
-﻿import os
-import json
-import random
+import os, json, random
 from collections import defaultdict
 
 import sys
@@ -8,10 +6,6 @@ sys.path.insert(0, "src")
 from hybrid_engine import hybrid_attribute, load_semantic_components, load_ioc_index
 from attribution_engine import load_groups_with_idf
 
-# Real, verified mapping: Guru et al. folder name -> TRACE canonical
-# name, for all 27 confirmed overlaps (Lazarus Group corrected after
-# discovering it was being silently overwritten by AppleJeus's
-# alias-cluster contamination in the naive lookup)
 OVERLAP_MAP = {
     "APT17": "APT17", "APT28": "APT28", "APT29": "APT29", "APT3": "APT3",
     "APT32": "APT32", "APT33": "APT33", "APT39": "APT39",
@@ -25,8 +19,8 @@ OVERLAP_MAP = {
     "Turla": "Turla", "Winnti Group": "Winnti Group",
     "Wizard Spider": "Wizard Spider", "menuPass": "menuPass",
 }
+MAX_PER_ACTOR = 15
 
-MAX_PER_ACTOR = 15  # same cap as the original benchmark, for fairness
 
 def load_guru_dataset(base_path="guru_dataset/threat_actors_added_data"):
     cases = []
@@ -46,32 +40,30 @@ def load_guru_dataset(base_path="guru_dataset/threat_actors_added_data"):
                 pass
     return cases
 
+
+def count_supporting_engines(r):
+    keys = ["keyword_score", "tool_score", "sector_score",
+            "motivation_score", "country_score", "ioc_score"]
+    return sum(1 for k in keys if r.get(k, 0) > 0)
+
+
 print("Loading components...")
 groups, idf_weights = load_groups_with_idf()
 model, embeddings, semantic_profiles = load_semantic_components()
 ioc_index = load_ioc_index()
 
-try:
-    with open("data/malpedia/malware_actor_index.json") as f:
-        malware_index = json.load(f)
-except FileNotFoundError:
-    malware_index = {}
-
+malware_index = {}
+if os.path.exists("data/malpedia/malware_actor_index.json"):
+    malware_index = json.load(open("data/malpedia/malware_actor_index.json"))
 
 allowed_names = set(OVERLAP_MAP.values())
 restricted_groups = [g for g in groups if g["name"] in allowed_names]
-
 restricted_indices = [i for i, p in enumerate(semantic_profiles) if p["name"] in allowed_names]
 restricted_semantic_profiles = [semantic_profiles[i] for i in restricted_indices]
 restricted_embeddings = embeddings[restricted_indices]
 
-print(f"Restricted candidate space: {len(restricted_groups)} actors "
-      f"(from {len(groups)} full KB)")
-print(f"Restricted semantic profiles: {len(restricted_semantic_profiles)}\n")
-
 print("Loading Guru et al. real dataset...")
 cases = load_guru_dataset()
-print(f"Loaded {len(cases)} real reports\n")
 
 rng = random.Random(42)
 by_actor = defaultdict(list)
@@ -100,25 +92,45 @@ for actor, items in by_actor.items():
 
         names = [p["name"] for p in predictions]
         rank = names.index(actor) + 1 if actor in names else len(restricted_groups) + 1
-        results.append({"actor": actor, "file": fname, "rank": rank,
-                         "top1": rank == 1, "top3": rank <= 3})
+        top1 = rank == 1
+
+        # Real per-case engine data for the TOP prediction specifically
+        top_result = predictions[0] if predictions else {}
+        direct_signal = top_result.get("direct_signal", False)
+        support_count = count_supporting_engines(top_result)
+
+        results.append({
+            "actor": actor, "file": fname, "rank": rank, "top1": top1,
+            "direct_signal": direct_signal, "support_count": support_count,
+        })
 
 n = len(results)
-avg_rank = sum(r["rank"] for r in results) / n
-top1 = sum(r["top1"] for r in results)
-top3 = sum(r["top3"] for r in results)
+top1_cases = [r for r in results if r["top1"]]
+wrong_cases = [r for r in results if not r["top1"]]
 
-print("\n" + "="*65)
-print("MATCHED-CANDIDATE-SPACE BENCHMARK vs Guru et al. (2025)")
-print("="*65)
-print(f"Candidate space: {len(restricted_groups)} actors (matched to Guru et al.'s real overlap)")
-print(f"Total real reports tested: {n}")
-print(f"Average rank of correct actor: {avg_rank:.2f}")
-print(f"  (Guru et al. published: 7.55 best config / 10.68 baseline / chance=15.0 on 29 actors)")
-print(f"  (Chance on THIS {len(restricted_groups)}-actor space: {len(restricted_groups)/2:.2f})")
-print(f"Top-1 accuracy: {top1}/{n} ({top1/n*100:.1f}%)")
-print(f"Top-3 accuracy: {top3}/{n} ({top3/n*100:.1f}%)")
+print("\n" + "="*70)
+print("MECHANISM ANALYSIS: why TRACE performed well on this matched space")
+print("="*70)
+print(f"Total cases: {n}")
+print(f"Top-1 correct: {len(top1_cases)} ({len(top1_cases)/n*100:.1f}%)")
+print()
 
-with open("data/guru_matched_benchmark_results.json", "w") as f:
+# Direct-signal (exclusive tool/IoC match) firing rate
+correct_direct = sum(1 for r in top1_cases if r["direct_signal"])
+wrong_direct = sum(1 for r in wrong_cases if r["direct_signal"])
+print(f"Direct-signal (exclusive tool/IoC match) fired on CORRECT predictions: "
+      f"{correct_direct}/{len(top1_cases)} ({correct_direct/len(top1_cases)*100:.1f}%)")
+if wrong_cases:
+    print(f"Direct-signal fired on WRONG predictions: "
+          f"{wrong_direct}/{len(wrong_cases)} ({wrong_direct/len(wrong_cases)*100:.1f}%)")
+
+# Average engine support
+avg_support_correct = sum(r["support_count"] for r in top1_cases) / len(top1_cases)
+print(f"\nAverage non-semantic engine support on CORRECT predictions: {avg_support_correct:.2f}")
+if wrong_cases:
+    avg_support_wrong = sum(r["support_count"] for r in wrong_cases) / len(wrong_cases)
+    print(f"Average non-semantic engine support on WRONG predictions: {avg_support_wrong:.2f}")
+
+with open("data/guru_matched_mechanism_results.json", "w") as f:
     json.dump(results, f, indent=2)
-print("\nSaved to data/guru_matched_benchmark_results.json")
+print("\nSaved to data/guru_matched_mechanism_results.json")

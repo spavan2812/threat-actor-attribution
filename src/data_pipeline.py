@@ -29,11 +29,11 @@ def clean_text(text):
     Removes markdown links and citation markers from MITRE descriptions.
     Example: [APT28](https://attack.mitre.org/groups/G0007) -> APT28
     """
-    # Remove markdown links but keep the display text
+   
     text = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', text)
-    # Remove citation markers
+    
     text = re.sub(r'\(Citation:[^\)]+\)', '', text)
-    # Clean up extra whitespace
+    
     text = re.sub(r'\s+', ' ', text).strip()
     return text
 
@@ -75,10 +75,10 @@ def extract_group_ttps(mitre, groups):
             techniques = mitre.get_techniques_used_by_group(group_stix_id)
 
             for entry in techniques:
-                # The actual technique is under the 'object' key
+             
                 technique = entry.get("object", {})
 
-                # Get technique ID from external references
+              
                 technique_id = ""
                 ext_refs = technique.get("external_references", [])
                 for ref in ext_refs:
@@ -86,16 +86,16 @@ def extract_group_ttps(mitre, groups):
                         technique_id = ref.get("external_id", "")
                         break
 
-                # Get technique name
+              
                 technique_name = technique.get("name", "")
 
-                # Get tactics from kill chain phases
+              
                 tactics = [
                     phase.get("phase_name", "")
                     for phase in technique.get("kill_chain_phases", [])
                 ]
 
-                # Get description and clean it
+              
                 description = clean_text(technique.get("description", ""))
 
                 if technique_id:

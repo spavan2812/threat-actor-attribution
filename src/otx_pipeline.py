@@ -73,7 +73,7 @@ def get_otx_client():
 
 def fetch_all_pulses_parallel(otx, actor_search_terms, max_pulses=8):
     
-    # Flatten to a list of (actor_name, term) pairs
+   
     all_pairs = [
         (actor_name, term)
         for actor_name, terms in actor_search_terms.items()
@@ -439,9 +439,7 @@ def build_ioc_actor_index():
             if actor_name in per_actor_counts:
                 per_actor_counts[actor_name] += 1
 
-    # Save everything that failed, in a format that can be fed
-    # straight back in for a targeted retry, rather than needing to
-    # rerun the entire 566-term search again from scratch.
+  
     if failed_searches or failed_indicator_fetches:
         os.makedirs("data/otx", exist_ok=True)
         with open("data/otx/failed_fetches.json", "w") as f:
@@ -488,10 +486,7 @@ if __name__ == "__main__":
     print(f"\nTotal unique IoCs indexed: {len(ioc_index)}")
     print("Saved to data/otx/ioc_actor_index.json")
 
-    # Flag IoCs shared across multiple actors — these are NOT
-    # reliable direct signals (same reasoning as shared tools like
-    # Mimikatz in attribution_engine.py) and should be treated as
-    # weak/generic evidence, not exclusive attribution.
+  
     shared = {k: v for k, v in ioc_index.items()
               if len(v["actors"]) > 1}
     if shared:

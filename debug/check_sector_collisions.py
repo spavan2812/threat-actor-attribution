@@ -23,8 +23,6 @@ for sector, count in sector_counts.most_common(20):
     print(f"{sector:<25} {count:>10} {count/n*100:>9.1f}%")
 
 print()
-# How many actors have IDENTICAL full sector sets to at least one other actor
-# (a genuine, hard tie -- not just sharing one common tag)
 sector_sets = {}
 for a in kb:
     key = frozenset(a.get("target_sectors", []))
