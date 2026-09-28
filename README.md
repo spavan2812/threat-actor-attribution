@@ -1,6 +1,6 @@
 # TRACE: Threat Actor Recognition and Attribution through Contextual Evidence
 
-MSc Applied Cybersecurity dissertation project (QUB, ELE8095). Full methodology and results are described in the dissertation; this README documents the reproducibility details referenced throughout the report as "recorded in the project repository."
+This README documents the reproducibility details referenced throughout the report as "recorded in the project repository."
 
 ## Repository structure
 
