@@ -2,7 +2,7 @@
   {
     "actor": "APT17",
     "file": "hdroot2.txt",
-    "rank": 14,
+    "rank": 16,
     "top1": false,
     "top3": false
   },
@@ -30,14 +30,14 @@
   {
     "actor": "APT17",
     "file": "watering.txt",
-    "rank": 9,
+    "rank": 12,
     "top1": false,
     "top3": false
   },
   {
     "actor": "APT17",
     "file": "threat.txt",
-    "rank": 8,
+    "rank": 9,
     "top1": false,
     "top3": false
   },
@@ -51,7 +51,7 @@
   {
     "actor": "APT17",
     "file": "ephemeral.txt",
-    "rank": 14,
+    "rank": 16,
     "top1": false,
     "top3": false
   },
@@ -79,9 +79,9 @@
   {
     "actor": "APT17",
     "file": "umbrella.txt",
-    "rank": 6,
+    "rank": 2,
     "top1": false,
-    "top3": false
+    "top3": true
   },
   {
     "actor": "APT17",
@@ -275,9 +275,9 @@
   {
     "actor": "APT29",
     "file": "Naming.txt",
-    "rank": 4,
+    "rank": 3,
     "top1": false,
-    "top3": false
+    "top3": true
   },
   {
     "actor": "APT29",
@@ -338,9 +338,9 @@
   {
     "actor": "APT3",
     "file": "tweets.txt",
-    "rank": 4,
+    "rank": 2,
     "top1": false,
-    "top3": false
+    "top3": true
   },
   {
     "actor": "APT3",
@@ -401,7 +401,7 @@
   {
     "actor": "APT32",
     "file": "MicrosoftThreat.txt",
-    "rank": 12,
+    "rank": 15,
     "top1": false,
     "top3": false
   },
@@ -415,9 +415,9 @@
   {
     "actor": "APT32",
     "file": "OceanLotus.txt",
-    "rank": 3,
+    "rank": 6,
     "top1": false,
-    "top3": true
+    "top3": false
   },
   {
     "actor": "APT32",
@@ -464,9 +464,9 @@
   {
     "actor": "APT32",
     "file": "macOSMalware.txt",
-    "rank": 3,
+    "rank": 5,
     "top1": false,
-    "top3": true
+    "top3": false
   },
   {
     "actor": "APT32",
@@ -485,7 +485,7 @@
   {
     "actor": "APT32",
     "file": "InvokeObfuscation.txt",
-    "rank": 6,
+    "rank": 8,
     "top1": false,
     "top3": false
   },
@@ -520,7 +520,7 @@
   {
     "actor": "APT33",
     "file": "UkraineAttack.txt",
-    "rank": 5,
+    "rank": 6,
     "top1": false,
     "top3": false
   },
@@ -534,14 +534,14 @@
   {
     "actor": "APT33",
     "file": "SteganoArmor.txt",
-    "rank": 4,
+    "rank": 9,
     "top1": false,
     "top3": false
   },
   {
     "actor": "APT33",
     "file": "RemcosRat.txt",
-    "rank": 16,
+    "rank": 18,
     "top1": false,
     "top3": false
   },
@@ -583,9 +583,9 @@
   {
     "actor": "APT39",
     "file": "Kuwait.txt",
-    "rank": 3,
+    "rank": 4,
     "top1": false,
-    "top3": true
+    "top3": false
   },
   {
     "actor": "APT39",
@@ -653,7 +653,7 @@
   {
     "actor": "Cobalt Group",
     "file": "CobaltCrowdstrike.txt",
-    "rank": 5,
+    "rank": 4,
     "top1": false,
     "top3": false
   },
@@ -681,8 +681,8 @@
   {
     "actor": "Cobalt Group",
     "file": "Ensnare.txt",
-    "rank": 2,
-    "top1": false,
+    "rank": 1,
+    "top1": true,
     "top3": true
   },
   {
@@ -702,7 +702,7 @@
   {
     "actor": "Cobalt Group",
     "file": "FinancialInstitutions.txt",
-    "rank": 4,
+    "rank": 5,
     "top1": false,
     "top3": false
   },
@@ -723,7 +723,7 @@
   {
     "actor": "Cobalt Group",
     "file": "Stegano.txt",
-    "rank": 24,
+    "rank": 25,
     "top1": false,
     "top3": false
   },
@@ -779,21 +779,21 @@
   {
     "actor": "Dragonfly 2.0",
     "file": "EnergyGrid.txt",
-    "rank": 16,
+    "rank": 12,
     "top1": false,
     "top3": false
   },
   {
     "actor": "Dragonfly 2.0",
     "file": "DYMALLOY.txt",
-    "rank": 20,
+    "rank": 23,
     "top1": false,
     "top3": false
   },
   {
     "actor": "Dragonfly 2.0",
     "file": "IronLiberty.txt",
-    "rank": 16,
+    "rank": 13,
     "top1": false,
     "top3": false
   },
@@ -835,7 +835,7 @@
   {
     "actor": "Dragonfly 2.0",
     "file": "FSBOps.txt",
-    "rank": 12,
+    "rank": 15,
     "top1": false,
     "top3": false
   },
@@ -898,7 +898,7 @@
   {
     "actor": "FIN6",
     "file": "NavigatingMaze.txt",
-    "rank": 16,
+    "rank": 17,
     "top1": false,
     "top3": false
   },
@@ -919,7 +919,7 @@
   {
     "actor": "FIN6",
     "file": "Crowdstrike2018.txt",
-    "rank": 2,
+    "rank": 3,
     "top1": false,
     "top3": true
   },
@@ -1066,14 +1066,14 @@
   {
     "actor": "FIN7",
     "file": "CarbonCrowdstrike.txt",
-    "rank": 5,
+    "rank": 6,
     "top1": false,
     "top3": false
   },
   {
     "actor": "Gamaredon Group",
     "file": "NamingThreatActors.txt",
-    "rank": 14,
+    "rank": 12,
     "top1": false,
     "top3": false
   },
@@ -1129,7 +1129,7 @@
   {
     "actor": "Gamaredon Group",
     "file": "NovelRTF.txt",
-    "rank": 11,
+    "rank": 10,
     "top1": false,
     "top3": false
   },
@@ -1149,23 +1149,23 @@
   },
   {
     "actor": "Kimsuky",
-    "file": "NamingConvention.txt",
-    "rank": 25,
-    "top1": false,
-    "top3": false
+    "file": "CISAAdvisory.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
   },
   {
     "actor": "Kimsuky",
     "file": "Academia.txt",
-    "rank": 12,
+    "rank": 9,
     "top1": false,
     "top3": false
   },
   {
     "actor": "Kimsuky",
-    "file": "CISAAdvisory.txt",
-    "rank": 1,
-    "top1": true,
+    "file": "UNSecuity.txt",
+    "rank": 2,
+    "top1": false,
     "top3": true
   },
   {
@@ -1184,20 +1184,6 @@
   },
   {
     "actor": "Kimsuky",
-    "file": "speakPhish.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Kimsuky",
-    "file": "VelvetChollima.txt",
-    "rank": 2,
-    "top1": false,
-    "top3": true
-  },
-  {
-    "actor": "Kimsuky",
     "file": "SouthKorean.txt",
     "rank": 1,
     "top1": true,
@@ -1205,28 +1191,14 @@
   },
   {
     "actor": "Kimsuky",
-    "file": "ChromeExtention.txt",
-    "rank": 19,
+    "file": "NamingConvention.txt",
+    "rank": 25,
     "top1": false,
     "top3": false
   },
   {
     "actor": "Kimsuky",
-    "file": "Northkorean.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Kimsuky",
-    "file": "KGHSpyware.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Kimsuky",
-    "file": "TargetReconnaisance.txt",
+    "file": "speakPhish.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -1247,10 +1219,66 @@
   },
   {
     "actor": "Kimsuky",
+    "file": "Northkorean.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "KGHSpyware.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "ChromeExtention.txt",
+    "rank": 19,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Kimsuky",
     "file": "StealthPower.txt",
     "rank": 7,
     "top1": false,
     "top3": false
+  },
+  {
+    "actor": "Kimsuky",
+    "file": "TargetReconnaisance.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "Lazarus_drop2-attacks-suggest-dark-seoul-attackers-return(1).txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "loaders.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "NorthStar.txt",
+    "rank": 5,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Lazarus Group",
+    "file": "Lazarus_sony-pictures-hacking-traced-thai-hotel-north-korea-denies-involvement.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
   },
   {
     "actor": "Lazarus Group",
@@ -1330,37 +1358,37 @@
     "top3": true
   },
   {
-    "actor": "Lazarus Group",
-    "file": "Lazarus_TA17-318A.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Lazarus Group",
-    "file": "DDOS.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Lazarus Group",
-    "file": "Lazarus_analyzing-operation-ghostsecret-attack-seeks-to-steal-data-worldwide.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Lazarus Group",
-    "file": "Job(1).txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
+    "actor": "Magic Hound",
+    "file": "RocketKitten.txt",
+    "rank": 5,
+    "top1": false,
+    "top3": false
   },
   {
     "actor": "Magic Hound",
-    "file": "CounteringIranThreats(1).txt",
+    "file": "Complaint.txt",
+    "rank": 17,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Magic Hound",
+    "file": "Impersonation.txt",
     "rank": 4,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Magic Hound",
+    "file": "SocialMedia.txt",
+    "rank": 5,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Magic Hound",
+    "file": "Complaint(1).txt",
+    "rank": 17,
     "top1": false,
     "top3": false
   },
@@ -1381,62 +1409,20 @@
   {
     "actor": "Magic Hound",
     "file": "NamingCTA.txt",
-    "rank": 15,
+    "rank": 14,
     "top1": false,
     "top3": false
   },
   {
     "actor": "Magic Hound",
     "file": "NamingCTA(1).txt",
-    "rank": 15,
+    "rank": 14,
     "top1": false,
     "top3": false
   },
   {
     "actor": "Magic Hound",
-    "file": "Impersonation.txt",
-    "rank": 3,
-    "top1": false,
-    "top3": true
-  },
-  {
-    "actor": "Magic Hound",
-    "file": "RocketKitten.txt",
-    "rank": 6,
-    "top1": false,
-    "top3": false
-  },
-  {
-    "actor": "Magic Hound",
-    "file": "Ransomware.txt",
-    "rank": 5,
-    "top1": false,
-    "top3": false
-  },
-  {
-    "actor": "Magic Hound",
-    "file": "SocialMedia.txt",
-    "rank": 4,
-    "top1": false,
-    "top3": false
-  },
-  {
-    "actor": "Magic Hound",
-    "file": "Complaint(1).txt",
-    "rank": 18,
-    "top1": false,
-    "top3": false
-  },
-  {
-    "actor": "Magic Hound",
-    "file": "Phosphorous.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Magic Hound",
-    "file": "ChristmasGift.txt",
+    "file": "SpoofedScholars.txt",
     "rank": 4,
     "top1": false,
     "top3": false
@@ -1451,20 +1437,34 @@
   {
     "actor": "Magic Hound",
     "file": "ProtectingCustomers.txt",
-    "rank": 10,
+    "rank": 8,
     "top1": false,
     "top3": false
   },
   {
     "actor": "Magic Hound",
-    "file": "Powershell.txt",
-    "rank": 1,
-    "top1": true,
+    "file": "PupyRat.txt",
+    "rank": 3,
+    "top1": false,
     "top3": true
   },
   {
+    "actor": "Magic Hound",
+    "file": "RocketKitten(1).txt",
+    "rank": 5,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Magic Hound",
+    "file": "ChristmasGift.txt",
+    "rank": 4,
+    "top1": false,
+    "top3": false
+  },
+  {
     "actor": "MuddyWater",
-    "file": "MuddyingTheWater.txt",
+    "file": "maliciousPDF.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -1478,70 +1478,7 @@
   },
   {
     "actor": "MuddyWater",
-    "file": "maliciousPDF.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "MuddyWater",
-    "file": "ExpandsCooperation.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "MuddyWater",
-    "file": "GlobalCyberNetwork.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "MuddyWater",
-    "file": "StaticKitten.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "MuddyWater",
-    "file": "Lebanon.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "MuddyWater",
-    "file": "PRBBackdoor.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "MuddyWater",
-    "file": "Seedworm.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "MuddyWater",
-    "file": "SmallSieve.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "MuddyWater",
-    "file": "IranCyberSuite.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "MuddyWater",
-    "file": "PowerstatsV3.txt",
+    "file": "Arsenal.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -1555,6 +1492,13 @@
   },
   {
     "actor": "MuddyWater",
+    "file": "SmallSieve.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "MuddyWater",
     "file": "MiddleEast.txt",
     "rank": 1,
     "top1": true,
@@ -1562,14 +1506,63 @@
   },
   {
     "actor": "MuddyWater",
-    "file": "Anti-Detection.txt",
-    "rank": 6,
+    "file": "GlobalCyberNetwork.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "MuddyWater",
+    "file": "IranCyberSuite.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "MuddyWater",
+    "file": "StaticKitten.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "MuddyWater",
+    "file": "PowerstatsV3.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "MuddyWater",
+    "file": "Powershell.txt",
+    "rank": 15,
     "top1": false,
     "top3": false
   },
   {
-    "actor": "OilRig",
-    "file": "OilRig_unit42-oilrig-uses-updated-bondupdater-target-middle-eastern-government.txt",
+    "actor": "MuddyWater",
+    "file": "Lebanon.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "MuddyWater",
+    "file": "MuddyingTheWater.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "MuddyWater",
+    "file": "Seedworm.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "MuddyWater",
+    "file": "PRBBackdoor.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -1597,7 +1590,7 @@
   },
   {
     "actor": "OilRig",
-    "file": "Steganography.txt",
+    "file": "ThreeDollars.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -1618,14 +1611,14 @@
   },
   {
     "actor": "OilRig",
-    "file": "RGDoor.txt",
+    "file": "ShamoonAttacks.txt",
     "rank": 1,
     "top1": true,
     "top3": true
   },
   {
     "actor": "OilRig",
-    "file": "UpdateToolkit.txt",
+    "file": "Weaponization.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -1646,52 +1639,38 @@
   },
   {
     "actor": "OilRig",
-    "file": "OilRig_targeted-attack-in-middle-east-by-apt34.txt",
+    "file": "Steganography.txt",
     "rank": 1,
     "top1": true,
     "top3": true
   },
   {
     "actor": "OilRig",
-    "file": "OilRig_playbook_viewer.txt",
+    "file": "APT34.txt",
+    "rank": 2,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "OilRig",
+    "file": "UpdateToolkit.txt",
     "rank": 1,
     "top1": true,
     "top3": true
   },
   {
     "actor": "OilRig",
-    "file": "OilRig_unit42-striking-oil-closer-look-adversary-infrastructure.txt",
+    "file": "OilRig_the-oilrig-campaign-attacks-on-saudi-arabian-organizations-deliver-helminth-backdoor.txt",
     "rank": 1,
     "top1": true,
     "top3": true
   },
   {
     "actor": "OilRig",
-    "file": "OilRig_unit42-oopsie-oilrig-uses-threedollars-deliver-new-trojan.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Sandworm Team",
-    "file": "CentreonSystems.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Sandworm Team",
-    "file": "TelebotsBackdoor.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Sandworm Team",
-    "file": "SANSInfoSharing.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
+    "file": "HardPass.txt",
+    "rank": 4,
+    "top1": false,
+    "top3": false
   },
   {
     "actor": "Sandworm Team",
@@ -1702,21 +1681,21 @@
   },
   {
     "actor": "Sandworm Team",
-    "file": "DeepElectricGrid.txt",
+    "file": "IronViking.txt",
     "rank": 1,
     "top1": true,
     "top3": true
   },
   {
     "actor": "Sandworm Team",
-    "file": "VooDooBear.txt",
-    "rank": 1,
-    "top1": true,
+    "file": "GRUIntrusionSet.txt",
+    "rank": 2,
+    "top1": false,
     "top3": true
   },
   {
     "actor": "Sandworm Team",
-    "file": "UKRPowerAuthority.txt",
+    "file": "VPNFilter.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -1724,7 +1703,7 @@
   {
     "actor": "Sandworm Team",
     "file": "MicrosoftOffice.txt",
-    "rank": 12,
+    "rank": 8,
     "top1": false,
     "top3": false
   },
@@ -1765,7 +1744,28 @@
   },
   {
     "actor": "Sandworm Team",
-    "file": "UkraineCriticalInfra.txt",
+    "file": "UKRPowerAuthority.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "DeepElectricGrid.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "BroadPRCVuln.txt",
+    "rank": 10,
+    "top1": false,
+    "top3": false
+  },
+  {
+    "actor": "Sandworm Team",
+    "file": "SupplyChainUkraine.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -1779,35 +1779,7 @@
   },
   {
     "actor": "TA505",
-    "file": "BriefHistory.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "TA505",
-    "file": "LOLBins.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "TA505",
-    "file": "ServHelper.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "TA505",
-    "file": "NonRussian.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "TA505",
-    "file": "AmmyySourceCode.txt",
+    "file": "ClopRansomware.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -1821,13 +1793,6 @@
   },
   {
     "actor": "TA505",
-    "file": "ServHelperFlawed.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "TA505",
     "file": "SDBBotRat.txt",
     "rank": 1,
     "top1": true,
@@ -1835,14 +1800,7 @@
   },
   {
     "actor": "TA505",
-    "file": "SDBotRemoteAccess.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "TA505",
-    "file": "HTMLRats.txt",
+    "file": "NonRussian.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -1856,21 +1814,7 @@
   },
   {
     "actor": "TA505",
-    "file": "DridexGlobeImposter.txt",
-    "rank": 2,
-    "top1": false,
-    "top3": true
-  },
-  {
-    "actor": "TA505",
-    "file": "ClopRansomware.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "TA505",
-    "file": "Cyberreason.txt",
+    "file": "AmmyySourceCode.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -1883,8 +1827,57 @@
     "top3": true
   },
   {
-    "actor": "TeamTNT",
-    "file": "ContainerImages.txt",
+    "actor": "TA505",
+    "file": "BriefHistory.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "TA505",
+    "file": "HTMLRats.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "TA505",
+    "file": "ProfilingKorean.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "TA505",
+    "file": "LOLBins.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "TA505",
+    "file": "ServHelperFlawed.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "TA505",
+    "file": "DridexGlobeImposter.txt",
+    "rank": 2,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "TA505",
+    "file": "SDBotRemoteAccess.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "TA505",
+    "file": "ServHelper.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -1905,14 +1898,14 @@
   },
   {
     "actor": "TeamTNT",
-    "file": "CloudEnvironments.txt",
+    "file": "TrackingTNT.txt",
     "rank": 1,
     "top1": true,
     "top3": true
   },
   {
     "actor": "TeamTNT",
-    "file": "TrackingTNT.txt",
+    "file": "CryptojackingVariant.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -1926,7 +1919,21 @@
   },
   {
     "actor": "TeamTNT",
-    "file": "TargetingAlibaba.txt",
+    "file": "ContainerImages.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "TeamTNT",
+    "file": "CloudEnvironments.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "TeamTNT",
+    "file": "CryptominingExplosion.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -1947,23 +1954,23 @@
   },
   {
     "actor": "TeamTNT",
-    "file": "CryptojackingVariant.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "TeamTNT",
-    "file": "CryptominingExplosion.txt",
+    "file": "TargetingAlibaba.txt",
     "rank": 1,
     "top1": true,
     "top3": true
   },
   {
     "actor": "Threat Group-3390",
-    "file": "SecureWorks.txt",
-    "rank": 2,
-    "top1": false,
+    "file": "BronzeUnion.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Threat Group-3390",
+    "file": "BronzeUnionToolbox.txt",
+    "rank": 1,
+    "top1": true,
     "top3": true
   },
   {
@@ -1971,6 +1978,20 @@
     "file": "WateringHole.txt",
     "rank": 1,
     "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Threat Group-3390",
+    "file": "APT27Ransomware.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Threat Group-3390",
+    "file": "NationalDataCenter.txt",
+    "rank": 2,
+    "top1": false,
     "top3": true
   },
   {
@@ -1989,7 +2010,7 @@
   },
   {
     "actor": "Threat Group-3390",
-    "file": "IronTigerSysUpdate.txt",
+    "file": "EmissaryPanda.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -2003,7 +2024,7 @@
   },
   {
     "actor": "Threat Group-3390",
-    "file": "BronzeUnion.txt",
+    "file": "IronTigerSysUpdate.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -2017,27 +2038,6 @@
   },
   {
     "actor": "Threat Group-3390",
-    "file": "BronzeDropbox(1).txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Threat Group-3390",
-    "file": "APT27Ransomware.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Threat Group-3390",
-    "file": "BronzeUnionToolbox.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Threat Group-3390",
     "file": "IronTiger.txt",
     "rank": 1,
     "top1": true,
@@ -2045,14 +2045,14 @@
   },
   {
     "actor": "Threat Group-3390",
-    "file": "EmissaryPanda.txt",
+    "file": "BronzeDropbox(1).txt",
     "rank": 1,
     "top1": true,
     "top3": true
   },
   {
     "actor": "Threat Group-3390",
-    "file": "NationalDataCenter.txt",
+    "file": "SecureWorks.txt",
     "rank": 2,
     "top1": false,
     "top3": true
@@ -2066,17 +2066,31 @@
   },
   {
     "actor": "Tonto Team",
+    "file": "SouthKorea.txt",
+    "rank": 2,
+    "top1": false,
+    "top3": true
+  },
+  {
+    "actor": "Tonto Team",
+    "file": "BronzeHunt.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Tonto Team",
+    "file": "Manufacturing.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Tonto Team",
     "file": "NOTInMitre.txt",
     "rank": 6,
     "top1": false,
     "top3": false
-  },
-  {
-    "actor": "Tonto Team",
-    "file": "CactusPete.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
   },
   {
     "actor": "Tonto Team",
@@ -2094,28 +2108,7 @@
   },
   {
     "actor": "Tonto Team",
-    "file": "Manufacturing.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Tonto Team",
-    "file": "BronzeHunt.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Tonto Team",
-    "file": "HeartbeatAPT.txt",
-    "rank": 4,
-    "top1": false,
-    "top3": false
-  },
-  {
-    "actor": "Tonto Team",
-    "file": "SouthKorea.txt",
+    "file": "CactusPete.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -2128,11 +2121,11 @@
     "top3": true
   },
   {
-    "actor": "Tropic Trooper",
-    "file": "TrendMicro.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
+    "actor": "Tonto Team",
+    "file": "HeartbeatAPT.txt",
+    "rank": 4,
+    "top1": false,
+    "top3": false
   },
   {
     "actor": "Tropic Trooper",
@@ -2150,20 +2143,6 @@
   },
   {
     "actor": "Tropic Trooper",
-    "file": "RedEcho.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Tropic Trooper",
-    "file": "TropicTrooperTaiwan.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Tropic Trooper",
     "file": "COVID19.txt",
     "rank": 2,
     "top1": false,
@@ -2171,7 +2150,14 @@
   },
   {
     "actor": "Tropic Trooper",
-    "file": "TibetianDiaspora.txt",
+    "file": "RedEcho.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Tropic Trooper",
+    "file": "TropicTrooperPdf.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -2192,35 +2178,21 @@
   },
   {
     "actor": "Tropic Trooper",
-    "file": "TropicTrooperPdf.txt",
+    "file": "TropicTrooperTaiwan.txt",
     "rank": 1,
     "top1": true,
     "top3": true
   },
   {
-    "actor": "Turla",
-    "file": "LightNeuron.txt",
+    "actor": "Tropic Trooper",
+    "file": "TibetianDiaspora.txt",
     "rank": 1,
     "top1": true,
     "top3": true
   },
   {
-    "actor": "Turla",
-    "file": "Turla_turla-unique-outlook-backdoor.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Turla",
-    "file": "Turla_waterbug-attack-group.txt",
-    "rank": 1,
-    "top1": true,
-    "top3": true
-  },
-  {
-    "actor": "Turla",
-    "file": "TurlaGalaxyOpportunity.txt",
+    "actor": "Tropic Trooper",
+    "file": "TrendMicro.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -2255,6 +2227,20 @@
   },
   {
     "actor": "Turla",
+    "file": "Turla_turla-unique-outlook-backdoor.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Turla",
+    "file": "Turla_turla-mosquito-shift-towards-generic-tools.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Turla",
     "file": "TurlaDriveLoader.txt",
     "rank": 1,
     "top1": true,
@@ -2269,7 +2255,7 @@
   },
   {
     "actor": "Turla",
-    "file": "VenomousBear.txt",
+    "file": "TurlaGalaxyOpportunity.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -2290,7 +2276,14 @@
   },
   {
     "actor": "Turla",
-    "file": "Turla_turla-cyberespionage-gang-employs-adobe-flash-installer.txt",
+    "file": "Turla_turlas-watering-hole-campaign-updated-firefox-extension-abusing-instagram.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Turla",
+    "file": "Turla_the-epic-turla-operation.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -2303,8 +2296,8 @@
     "top3": true
   },
   {
-    "actor": "Winnti Group",
-    "file": "Winnti_chinese-hacking-group-allegedly-behind-thyssenkrupp-hack.txt",
+    "actor": "Turla",
+    "file": "Turla_turla-cyberespionage-gang-employs-adobe-flash-installer.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -2325,14 +2318,21 @@
   },
   {
     "actor": "Winnti Group",
+    "file": "Winnti_winnti-more-than-just-a-game.txt",
+    "rank": 1,
+    "top1": true,
+    "top3": true
+  },
+  {
+    "actor": "Winnti Group",
     "file": "Winnti_suckfly-revealing-secret-life-your-code-signing-certificates.txt",
-    "rank": 5,
+    "rank": 6,
     "top1": false,
     "top3": false
   },
   {
     "actor": "Winnti Group",
-    "file": "Winnti_winnti-more-than-just-a-game.txt",
+    "file": "Winnti_chinese-hacking-group-allegedly-behind-thyssenkrupp-hack.txt",
     "rank": 1,
     "top1": true,
     "top3": true
@@ -2368,8 +2368,8 @@
   {
     "actor": "Winnti Group",
     "file": "Winnti_the-winnti-honeypot-luring-intruders.txt",
-    "rank": 2,
-    "top1": false,
+    "rank": 1,
+    "top1": true,
     "top3": true
   },
   {
@@ -2536,8 +2536,8 @@
   {
     "actor": "menuPass",
     "file": "PoisonIvyFireEye.txt",
-    "rank": 2,
-    "top1": false,
+    "rank": 1,
+    "top1": true,
     "top3": true
   },
   {
@@ -2557,14 +2557,14 @@
   {
     "actor": "menuPass",
     "file": "SymantecBlog.txt",
-    "rank": 5,
+    "rank": 4,
     "top1": false,
     "top3": false
   },
   {
     "actor": "menuPass",
     "file": "menuPass_Op_Dust_Storm_Report.txt",
-    "rank": 13,
+    "rank": 10,
     "top1": false,
     "top3": false
   },

@@ -170,20 +170,7 @@ TEST_CASES = [
 def evaluate(model, embeddings, semantic_profiles, groups,
              test_cases, malware_index=None, idf_weights=None,
              ioc_index=None, use_reranking=False):
-    """
-    Runs evaluation across all test cases.
-    Computes Top-1, Top-3 accuracy and MRR.
-
-    use_reranking=True applies the cross-encoder reranking stage on
-    top of the normal fusion pipeline -- kept as an explicit toggle
-    so before/after comparisons are a one-flag change, not a
-    separate script.
-
-    ioc_index: pass the pre-loaded OTX-derived IoC index through
-    explicitly. Without this, hybrid_attribute() silently reloads
-    the ~594k-entry index file from disk on every single call --
-    loading it once here and threading it through avoids that.
-    """
+    
     if ioc_index is None:
         ioc_index = load_ioc_index()
 
@@ -283,51 +270,7 @@ def evaluate(model, embeddings, semantic_profiles, groups,
 def evaluate_partial_input(model, embeddings, semantic_profiles, groups,
                             test_cases, malware_index=None, ioc_index=None,
                             seed=42):
-    """
-    Controlled comparison of full-text vs partial-input accuracy.
-
-    IMPORTANT METHODOLOGY NOTE: an earlier version of this function
-    derived "TTP-only" input by extracting noisy, generic keyword
-    hints from the same prose description (e.g. mapping the word
-    "backdoor" to T1071). That is NOT what real TTP-only input looks
-    like -- an analyst submitting TTPs directly has already
-    identified SPECIFIC, CONFIRMED ATT&CK technique IDs from an
-    investigation, not vague prose-derived guesses. Testing with the
-    wrong kind of input produced a misleading 0% result that did not
-    reflect the system's real capability (verified directly: using
-    the expected actor's own real documented technique IDs, Top-1
-    was 80%, not 0%).
-
-    This version samples a real subset of EACH EXPECTED ACTOR'S OWN
-    documented technique IDs -- genuinely representative of what an
-    analyst who has actually identified specific techniques would
-    submit -- rather than approximating from generic prose language.
-
-    IoC-only condition: samples real indicators actually linked to
-    the expected actor in the OTX-derived ioc_actor_index, same
-    principle as TTP-only/sector-only -- what an analyst who has
-    collected real indicators during an investigation would submit.
-    Sampling is uniform across ALL indicators documented for that
-    actor (not restricted to exclusive-only matches), since an
-    analyst wouldn't know in advance which of their collected
-    indicators are exclusive to one actor vs shared infrastructure.
-
-    Sector+Motivation+Country condition (added): tests a realistic
-    combined-intel scenario -- an analyst who has confirmed the
-    target's sector, has a hypothesis about intent (espionage /
-    financial / sabotage), and has a country attribution hypothesis,
-    but no incident narrative text at all. Direct, measured
-    motivation: sector data alone produces a 20-actor exact-tie
-    cluster covering several of the highest-profile actors in this
-    evaluation set (APT29, Lazarus Group, Sandworm Team, Kimsuky).
-    Adding motivation and country -- both already present in the
-    knowledge base, no new source required -- was found to collapse
-    that same 20-actor cluster to a largest remaining subgroup of
-    just 7. This condition tests whether that real, measured
-    tie-breaking effect actually improves Top-1 on the full 15-case
-    suite, rather than assuming the raw-data tie-breakdown
-    automatically translates into a scoring win.
-    """
+    
     import random
     if malware_index is None:
         malware_index = {}

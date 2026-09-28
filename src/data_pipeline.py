@@ -60,11 +60,7 @@ def extract_groups(mitre):
     return group_list
 
 def extract_group_ttps(mitre, groups):
-    """
-    For each group, extracts ATT&CK techniques using the
-    correct object structure returned by the library.
-    Each technique entry has 'object' and 'relationships' keys.
-    """
+    
     print("Extracting TTPs for each group...")
 
     for group in groups:

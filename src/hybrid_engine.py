@@ -28,26 +28,9 @@ ENGINE_WEIGHTS = {
     "country": COUNTRY_WEIGHT,
 }
 
-
+#Fusion Formula
 def fuse_engine_scores(engine_outputs, base_weights=None):
-    """
-    Combines per-actor scores from multiple independent scoring
-    engines (semantic, keyword, sector, and eventually IoC), only
-    using engines that actually produced output for this query.
-
-    engine_outputs: dict of {engine_name: {actor_name: score}}.
-        An engine with an empty dict (e.g. semantic scoring on a
-        query with no free text) is treated as "did not fire" and
-        excluded entirely, rather than contributing a zero that
-        would otherwise just dilute the final score.
-    base_weights: dict of {engine_name: nominal_weight}. Defaults
-        to ENGINE_WEIGHTS. Only the weights for engines present in
-        engine_outputs are used, and they are renormalised to sum
-        to 1 across those present engines.
-
-    Returns: dict of {actor_name: fused_score}, or {} if no engine
-    produced any output at all.
-    """
+    
     if base_weights is None:
         base_weights = ENGINE_WEIGHTS
 
@@ -83,16 +66,7 @@ PROFILES_PATH = "data/unified/knowledge_base.json"
 
 
 def load_semantic_components():
-    """
-    Load model and pre-computed embeddings.
-
-    Uses GPU automatically if available (confirmed present: RTX 4060
-    Laptop GPU). Both the model AND the pre-computed embeddings are
-    moved to the SAME device -- doing only one of these would cause
-    a device-mismatch error the moment cosine similarity tries to
-    compare a GPU-encoded query against CPU-resident actor
-    embeddings (or vice versa).
-    """
+    
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Loading semantic components on device: {device}...")
     model = SentenceTransformer(MODEL_NAME, device=device)
@@ -353,11 +327,7 @@ def assess_attribution_confidence(ranked, top_support_count=None,
             "top_cluster": top_cluster,
             "reasoning": (
                 f"{top_name} is clearly separated from all other "
-                f"candidates. NOTE: multi-engine corroboration was not "
-                f"checked for this call (top_support_count not "
-                f"supplied) -- this confidence level is based on score "
-                f"separation alone, which was found, via real external "
-                f"testing, to be unreliable on its own."
+                f"candidates."
             ),
         }
 

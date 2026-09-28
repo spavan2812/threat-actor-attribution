@@ -66,13 +66,7 @@ def match_files_to_actors(files):
 
 
 def extract_iocs_from_csv_text(text):
-    """
-    Extracts IPs and domains from a CSV/TSV file's raw text. These
-    files aren't uniformly structured (columns vary by file), so
-    this uses regex extraction across the whole text rather than
-    assuming a fixed column layout — safer given the repo has many
-    different contributors/formats.
-    """
+    
     ips = set(IP_PATTERN.findall(text))
     # Filter domain matches down, excluding anything that's really
     # just an IP (the IP pattern already caught those)
