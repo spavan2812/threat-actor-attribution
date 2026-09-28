@@ -36,11 +36,6 @@ DIRECT_SIGNAL_BOOST = 0.25
 
 Cross-encoder reranking (development-set comparison only): `cross-encoder/ms-marco-MiniLM-L-6-v2`, top 10 candidates, blend weight 0.3.
 
-## Excluded from this repository
-
-- `data/otx/ioc_actor_index.json` (~2GB) — exceeds GitLab's file size limit. `load_ioc_index()` in `hybrid_engine.py` degrades gracefully and returns `{}` if this file is absent, so the system still runs without the IoC engine's contribution. Rebuild via `python src/otx_pipeline.py` (requires an AlienVault OTX API key).
-- `guru_dataset/`, `cti_bench_repo/`, `dataset/` — third-party datasets, not redistributed. See dissertation Section IV for how to obtain each (Guru et al.'s public GitHub repository; CTIBench's official release).
-
 ## Reproducing key results
 
 - Development set + partial-input ablation: `python src/evaluation.py`
